@@ -28,6 +28,7 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (UIManager.main.IsHoveringUI()) return;
         if (towerObj != null)
         {
             turret.OpenUpgradeUI();

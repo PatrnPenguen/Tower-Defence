@@ -17,9 +17,22 @@ public class Turret : MonoBehaviour
     [SerializeField] private float targetingRange = 2f;
     [SerializeField] private float rotationSpeed = 200f;
     [SerializeField] private float bulletsPerSecond = 1f;
+    [SerializeField] private int baseUpgradeCost = 100;
+    
+    private float baseTargetingRange;
+    private float baseBulletPerSecond;
 
     private Transform target;
     private float timeUntilFire;
+    private int level = 1;
+
+    private void Start()
+    {
+        baseTargetingRange = targetingRange;
+        baseBulletPerSecond = bulletsPerSecond;
+        
+        upgradeButton.onClick.AddListener(Upgrade);
+    }
 
     private void Update()
     {
@@ -88,6 +101,34 @@ public class Turret : MonoBehaviour
     public void CloseUpgradeUI()
     {
         upgradeUI.SetActive(false);
+        UIManager.main.SetHoveringState(false);
+    }
+
+    public void Upgrade()
+    {
+        if(CalculateUpgradeCost() > LevelManager.main.currency) return;
+        
+        LevelManager.main.SpendCurrency(CalculateUpgradeCost());
+        
+        level++;
+        
+        targetingRange = CalculateTargetingRange();
+        bulletsPerSecond = CalculateBulletPerSecond();
+    }
+
+    private int CalculateUpgradeCost()
+    {
+        return Mathf.RoundToInt(baseUpgradeCost * Mathf.Pow(level, 0.8f));
+    }
+
+    private float CalculateTargetingRange()
+    {
+        return baseTargetingRange * Mathf.Pow(level, 0.4f);
+    }
+
+    private float CalculateBulletPerSecond()
+    {
+        return baseBulletPerSecond * Mathf.Pow(level, 0.6f);
     }
 
     private void OnDrawGizmosSelected()

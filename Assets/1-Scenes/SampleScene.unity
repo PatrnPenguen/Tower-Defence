@@ -5033,6 +5033,7 @@ GameObject:
   - component: {fileID: 767445841}
   - component: {fileID: 767445843}
   - component: {fileID: 767445844}
+  - component: {fileID: 767445845}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -5129,6 +5130,18 @@ MonoBehaviour:
   - towerName: Slow Tower
     cost: 150
     prefab: {fileID: 2432558508241944617, guid: 8768a3e47beae8c488607ac9beed9a53, type: 3}
+--- !u!114 &767445845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767445840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e21b837d036677419fea367aa00dbd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &767979323 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4695234448291126767, guid: 17161a53aa055234cba721d1e208297d, type: 3}

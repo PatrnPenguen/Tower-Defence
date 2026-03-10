@@ -18,7 +18,10 @@ public class Bullet : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!target) return;
+        if (!target) {
+            Destroy(gameObject);
+            return;
+        }
         Vector2 direction = (target.position - transform.position).normalized;
         rb.linearVelocity = direction * bulletSpeed;
     }
