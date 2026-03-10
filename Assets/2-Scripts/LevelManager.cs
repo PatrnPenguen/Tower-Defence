@@ -9,7 +9,8 @@ public class LevelManager : MonoBehaviour
     public Transform startPoint;
     public Transform[] path;
 
-    public int currency;
+    [SerializeField] private int startCurrency;
+    [NonSerialized] public int currency;
     private void Awake()
     {
         main = this;
@@ -17,7 +18,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        currency = 100;
+        currency = startCurrency;
     }
 
     public void IncreaseCurrency(int amount)

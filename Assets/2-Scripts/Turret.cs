@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
 
 public class Turret : MonoBehaviour
@@ -9,9 +10,11 @@ public class Turret : MonoBehaviour
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
+    [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private Button upgradeButton;
     
     [Header("Attribute")] 
-    [SerializeField] private float targetingRange = 3f;
+    [SerializeField] private float targetingRange = 2f;
     [SerializeField] private float rotationSpeed = 200f;
     [SerializeField] private float bulletsPerSecond = 1f;
 
@@ -75,6 +78,16 @@ public class Turret : MonoBehaviour
     private bool CheckTargetIsInRange()
     {
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
+    }
+
+    public void OpenUpgradeUI()
+    {
+        upgradeUI.SetActive(true);
+    }
+
+    public void CloseUpgradeUI()
+    {
+        upgradeUI.SetActive(false);
     }
 
     private void OnDrawGizmosSelected()

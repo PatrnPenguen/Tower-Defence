@@ -7,13 +7,15 @@ public class EnemyMovment : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     
     [Header("Atrributes")]
-    [SerializeField] private float speed =2f;
+    [SerializeField] private float moveSpeed =2f;
     
     private Transform target;
     private int pathIndex = 0;
+    private float baseSpeed;
 
     private void Start()
     {
+        baseSpeed = moveSpeed;
         target = LevelManager.main.path[0];
     }
 
@@ -39,6 +41,16 @@ public class EnemyMovment : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 direction = (target.position - transform.position).normalized;
-        rb.linearVelocity = direction * speed;
+        rb.linearVelocity = direction * moveSpeed;
+    }
+
+    public void UpdateSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
+
+    public void ResetSpeed()
+    {
+        moveSpeed = baseSpeed;
     }
 }

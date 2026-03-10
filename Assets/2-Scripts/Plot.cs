@@ -7,7 +7,8 @@ public class Plot : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
     
-    private GameObject tower;
+    public GameObject towerObj;
+    public Turret turret;
     private Color startColor;
 
     private void Start()
@@ -27,9 +28,21 @@ public class Plot : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (tower != null) return;
+        if (towerObj != null)
+        {
+            turret.OpenUpgradeUI();
+            return;
+        }
 
-        GameObject towerToBuild = BuildManager.main.GetSelectedTower();
-        tower = Instantiate(towerToBuild, transform.position, Quaternion.identity);
+        Tower towerToBuild = BuildManager.main.GetSelectedTower();
+
+        if (towerToBuild.cost > LevelManager.main.currency)
+        {
+            Debug.Log("Not enough money");
+            return;
+        }
+        LevelManager.main.SpendCurrency(towerToBuild.cost);
+        towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
+        turret = towerObj.GetComponent<Turret>();
     }
 }
