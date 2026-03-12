@@ -94,6 +94,12 @@ public class ArcherTower : TowerBasics
 
     public override void UpgradeTower()
     {
+        if (!CanUpgrade())
+        {
+            Debug.Log("Tower is already at max level");
+            return;
+        }
+        
         if (LevelManager.main.currency < upgradeCost)
         {
             Debug.Log("Not enough money to upgrade");
@@ -109,7 +115,10 @@ public class ArcherTower : TowerBasics
         upgradeCost += 30;
         sellCost += 20;
 
+        currentLevel++;
+
         Debug.Log("Archer tower upgraded");
+        UpdateButtonTexts();
     }
 
     private void OnDrawGizmosSelected()

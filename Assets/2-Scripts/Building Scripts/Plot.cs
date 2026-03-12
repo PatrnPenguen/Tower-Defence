@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class Plot : MonoBehaviour
 {
+    public static Plot main;
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
@@ -10,6 +12,11 @@ public class Plot : MonoBehaviour
     public TowerBasics tower;
     private Color startColor;
 
+    private void Awake()
+    {
+        main = this;
+    }
+
     private void Start()
     {
         startColor = sr.color;
@@ -17,6 +24,8 @@ public class Plot : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (UIManager.main.IsHoveringUI()) return;
+
         sr.color = hoverColor;
     }
 
@@ -58,13 +67,13 @@ public class Plot : MonoBehaviour
             return;
         }
 
-        if (towerBasics.Cost > LevelManager.main.currency)
+        if (towerBasics.BuildCost > LevelManager.main.currency)
         {
             Debug.Log("Not enough money");
             return;
         }
 
-        LevelManager.main.SpendCurrency(towerBasics.Cost);
+        LevelManager.main.SpendCurrency(towerBasics.BuildCost);
 
         towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
         tower = towerObj.GetComponent<TowerBasics>();

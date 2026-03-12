@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +8,7 @@ public class ShopTowerButton : MonoBehaviour
     [Header("Button Settings")]
     [SerializeField] private int towerIndex;
 
-    [Header("Visual References")]
+    [Header("References")]
     [SerializeField] private Image borderImage;
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color selectedColor = Color.yellow;

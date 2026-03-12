@@ -5196,11 +5196,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerPrefabs:
-  - towerName: Tower 1
+  - towerName: 
     prefab: {fileID: 3984585736339696520, guid: ed0a411cb55d00c4cbe268b980f39ede, type: 3}
-  - towerName: Tower 2
+  - towerName: 
     prefab: {fileID: 3984585736339696520, guid: bca971f049c998b4ab10df43231fc266, type: 3}
-  - towerName: Slow Tower
+  - towerName: 
     prefab: {fileID: 2432558508241944617, guid: 8768a3e47beae8c488607ac9beed9a53, type: 3}
 --- !u!114 &767445845
 MonoBehaviour:
@@ -9904,8 +9904,9 @@ GameObject:
   - component: {fileID: 1465531696}
   - component: {fileID: 1465531698}
   - component: {fileID: 1465531697}
-  - component: {fileID: 1465531699}
   - component: {fileID: 1465531700}
+  - component: {fileID: 1465531699}
+  - component: {fileID: 1465531701}
   m_Layer: 5
   m_Name: Shop Menu
   m_TagString: Untagged
@@ -10010,6 +10011,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1465531701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465531695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06afaa9ce7f75c44ea35ddc86d0d0447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1466066502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4695234448291126767, guid: 17161a53aa055234cba721d1e208297d, type: 3}
@@ -12350,7 +12363,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 170, y: 20}
+  m_AnchoredPosition: {x: 170, y: 15}
   m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1886377372
