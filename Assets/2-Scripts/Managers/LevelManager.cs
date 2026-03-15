@@ -1,16 +1,13 @@
 using System;
 using UnityEngine;
 
-
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager main;
 
-    public Transform startPoint;
-    public Transform[] path;
-
     [SerializeField] private int startCurrency;
     [NonSerialized] public int currency;
+
     private void Awake()
     {
         main = this;
@@ -33,10 +30,8 @@ public class LevelManager : MonoBehaviour
             currency -= amount;
             return true;
         }
-        else
-        {
-            Debug.Log("Not enough currency");
-            return false;
-        }
+
+        Debug.Log("Not enough currency");
+        return false;
     }
 }

@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: 0e64d6d5cda97b24c94a4baa2e95dffb
+guid: a34ce00c0815b9b4fb277053566b39b1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2579299117502204163
-    second: Tower 02_0
+      213: -624194594656105713
+    second: Tower 02 - Level 03 - Projectile_0
+  - first:
+      213: 4488492433401560586
+    second: Tower 02 - Level 03 - Projectile_1
+  - first:
+      213: 6514023479479907529
+    second: Tower 02 - Level 03 - Projectile_2
+  - first:
+      213: -1718924590554635936
+    second: Tower 02 - Level 03 - Projectile_3
+  - first:
+      213: -8572676570261995971
+    second: Tower 02 - Level 03 - Projectile_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tower 02_0
+      name: Tower 02 - Level 03 - Projectile_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 128
+        x: 7
+        y: 7
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,52 +140,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3098234b1e28bc320800000000000000
-      internalID: 2579299117502204163
+      spriteID: f0bcdc2c25a6657f0800000000000000
+      internalID: -624194594656105713
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tower 02_1
+      name: Tower 02 - Level 03 - Projectile_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 128
+        x: 38
+        y: 7
+        width: 17
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 1bda147e2adde1e4f97860a6cc431e22
-      internalID: 1237229840
+      spriteID: a0ebded46145a4e30800000000000000
+      internalID: 4488492433401560586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tower 02_2
+      name: Tower 02 - Level 03 - Projectile_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 128
+        x: 69
+        y: 9
+        width: 20
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 061f8b1c17d2ecb44b0a27f668586bdc
-      internalID: -725206189
+      spriteID: 9c434f087d5766a50800000000000000
+      internalID: 6514023479479907529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower 02 - Level 03 - Projectile_3
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 6
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 061ae4031372528e0800000000000000
+      internalID: -1718924590554635936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tower 02 - Level 03 - Projectile_4
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 8
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3e383f441cb70980800000000000000
+      internalID: -8572676570261995971
       vertices: []
       indices: 
       edges: []
@@ -182,7 +238,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fe1521e81c83e664d83150018a03af62
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -192,9 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tower 02_0: 2579299117502204163
-      Tower 02_1: 1237229840
-      Tower 02_2: -725206189
+      Tower 02 - Level 03 - Projectile_0: -624194594656105713
+      Tower 02 - Level 03 - Projectile_1: 4488492433401560586
+      Tower 02 - Level 03 - Projectile_2: 6514023479479907529
+      Tower 02 - Level 03 - Projectile_3: -1718924590554635936
+      Tower 02 - Level 03 - Projectile_4: -8572676570261995971
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

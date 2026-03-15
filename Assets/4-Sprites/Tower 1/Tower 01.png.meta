@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0e64d6d5cda97b24c94a4baa2e95dffb
+guid: 4f15b6021b7805b49a8f577faf7396e9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2579299117502204163
-    second: Tower 02_0
+      213: -5901685104126582622
+    second: Tower 01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tower 02_0
+      name: Tower 01_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,14 +128,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3098234b1e28bc320800000000000000
-      internalID: 2579299117502204163
+      spriteID: 2a022509aa0091ea0800000000000000
+      internalID: -5901685104126582622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tower 02_1
+      name: Tower 01_1
       rect:
         serializedVersion: 2
         x: 64
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bda147e2adde1e4f97860a6cc431e22
-      internalID: 1237229840
+      spriteID: 3e7401ed3426e0848a2abb110d11ac1d
+      internalID: 1957126396
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tower 02_2
+      name: Tower 01_2
       rect:
         serializedVersion: 2
         x: 128
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 061f8b1c17d2ecb44b0a27f668586bdc
-      internalID: -725206189
+      spriteID: aa958687b51ca8f4ea39a294a4883975
+      internalID: -1148917819
       vertices: []
       indices: 
       edges: []
@@ -182,7 +182,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fe1521e81c83e664d83150018a03af62
+    spriteID: bab566dc89ddcff4daa34fd1c836e630
     internalID: 0
     vertices: []
     indices: 
@@ -192,9 +192,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tower 02_0: 2579299117502204163
-      Tower 02_1: 1237229840
-      Tower 02_2: -725206189
+      Tower 01_0: -5901685104126582622
+      Tower 01_1: 1957126396
+      Tower 01_2: -1148917819
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

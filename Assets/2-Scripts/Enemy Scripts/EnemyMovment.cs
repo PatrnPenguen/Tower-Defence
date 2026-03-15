@@ -1,47 +1,70 @@
-using System;
 using UnityEngine;
 
 public class EnemyMovment : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
-    
-    [Header("Atrributes")]
-    [SerializeField] private float moveSpeed =2f;
-    
-    private Transform target;
+
+    [Header("Attributes")]
+    [SerializeField] private float moveSpeed = 2f;
+
+    private Transform[] currentPath;
+    private Transform currentTarget;
     private int pathIndex = 0;
     private float baseSpeed;
 
     private void Start()
     {
         baseSpeed = moveSpeed;
-        target = LevelManager.main.path[0];
     }
 
     private void Update()
     {
-        if (Vector2.Distance(transform.position, target.position) <= 0.1f)
+        if (currentTarget == null)
+        {
+            return;
+        }
+
+        if (Vector2.Distance(transform.position, currentTarget.position) <= 0.1f)
         {
             pathIndex++;
 
-            if (pathIndex == LevelManager.main.path.Length)
+            if (currentPath == null || pathIndex >= currentPath.Length)
             {
-                EnemySpawner.onEnemyDestroy.Invoke();
+                WaveManager.OnEnemyRemovedFromWave();
                 Destroy(gameObject);
                 return;
             }
-            else
-            {
-                target = LevelManager.main.path[pathIndex];
-            }
+
+            currentTarget = currentPath[pathIndex];
         }
     }
 
     private void FixedUpdate()
     {
-        Vector2 direction = (target.position - transform.position).normalized;
+        if (currentTarget == null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        Vector2 direction = (currentTarget.position - transform.position).normalized;
         rb.linearVelocity = direction * moveSpeed;
+    }
+
+    public void SetPath(Transform[] newPath)
+    {
+        if (newPath == null || newPath.Length == 0)
+        {
+            Debug.LogWarning("Path is empty.");
+            return;
+        }
+
+        currentPath = newPath;
+        pathIndex = 0;
+        currentTarget = currentPath[pathIndex];
+
+        transform.position = currentTarget.position;
     }
 
     public void UpdateSpeed(float newSpeed)

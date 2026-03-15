@@ -1,85 +1,72 @@
-using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private GameObject[] enemyPrefabs;
-    
-    [Header("Attributes")]
-    [SerializeField] private int baseEnemies = 8;
-    [SerializeField] private float enemiesPerSecond = 0.5f;
-    [SerializeField] private float timeBetweenWaves = 5f;
-    [SerializeField] private float difficultyScalingFactor = 0.75f;
+    [Header("Spawner Settings")]
+    [SerializeField] private SpawnerLane lane;
+    [SerializeField] private Transform[] pathPoints;
 
-    [Header("Events")]
-    public static UnityEvent onEnemyDestroy = new UnityEvent();
-    
-    private int currentWave = 1;
-    private float timeSinceLastSpawn;
-    private int enemiesAlive;
-    private int enemiesLeftToSpawn;
-    private bool isSpawning = false;
+    [Header("Warning")]
+    [SerializeField] private GameObject normalWarningObject;
+    [SerializeField] private GameObject bossWarningObject;
 
-    private void Awake()
+    public SpawnerLane Lane => lane;
+
+    public void SpawnEnemy(GameObject enemyPrefab)
     {
-        onEnemyDestroy.AddListener(EnemyDestroyed);
-    }
-
-    private void Start()
-    {
-        StartCoroutine(StartWave());
-    }
-
-    private void Update()
-    {
-        if (!isSpawning) return;
-        timeSinceLastSpawn += Time.deltaTime;
-
-        if (timeSinceLastSpawn >= (1f / enemiesPerSecond) && enemiesLeftToSpawn > 0)
+        if (enemyPrefab == null)
         {
-            SpawnEnemy();
-            enemiesLeftToSpawn--;
-            enemiesAlive++;
-            timeSinceLastSpawn = 0f;
+            return;
         }
 
-        if (enemiesAlive == 0 && enemiesLeftToSpawn == 0)
+        if (pathPoints == null || pathPoints.Length == 0)
         {
-            EndWave();
+            Debug.LogWarning(gameObject.name + " has no path points assigned.");
+            return;
+        }
+
+        Vector3 spawnPosition = pathPoints[0].position;
+
+        GameObject enemyObject = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+        EnemyMovment enemyMovment = enemyObject.GetComponent<EnemyMovment>();
+
+        if (enemyMovment != null)
+        {
+            enemyMovment.SetPath(pathPoints);
         }
     }
 
-    private void EnemyDestroyed()
+    public void ShowNormalWarning()
     {
-        enemiesAlive--;
+        HideWarnings();
+
+        if (normalWarningObject != null)
+        {
+            normalWarningObject.SetActive(true);
+        }
     }
 
-    private IEnumerator StartWave()
+    public void ShowBossWarning()
     {
-        yield return new WaitForSeconds(timeBetweenWaves);
-        isSpawning = true;
-        enemiesLeftToSpawn = EnemiesPerWave();
+        HideWarnings();
+
+        if (bossWarningObject != null)
+        {
+            bossWarningObject.SetActive(true);
+        }
     }
 
-    private void EndWave()
+    public void HideWarnings()
     {
-        isSpawning = false;
-        timeSinceLastSpawn = 0f;
-        currentWave++;
-        StartCoroutine(StartWave());
-    }
+        if (normalWarningObject != null)
+        {
+            normalWarningObject.SetActive(false);
+        }
 
-    private int EnemiesPerWave()
-    {
-        return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, difficultyScalingFactor));
-    }
-
-    private void SpawnEnemy()
-    {
-        GameObject prefabToSpawn = enemyPrefabs[0];
-        Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
+        if (bossWarningObject != null)
+        {
+            bossWarningObject.SetActive(false);
+        }
     }
 }
