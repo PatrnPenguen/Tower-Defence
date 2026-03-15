@@ -117,6 +117,8 @@ public class ArcherTower : TowerBasics
 
         currentLevel++;
 
+        UpdateTowerVisual();
+
         Debug.Log("Archer tower upgraded");
         UpdateButtonTexts();
     }

@@ -6113,10 +6113,10 @@ RectTransform:
   - {fileID: 1915208697}
   m_Father: {fileID: 1740154865}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &826794408
 MonoBehaviour:
@@ -6225,7 +6225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerIndex: 2
-  towerName: {fileID: 0}
   borderImage: {fileID: 333749876}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -10367,10 +10366,10 @@ RectTransform:
   - {fileID: 372635049}
   m_Father: {fileID: 1350589978}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1426518278
 MonoBehaviour:
@@ -10479,7 +10478,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerIndex: 1
-  towerName: {fileID: 0}
   borderImage: {fileID: 1343134925}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -10590,10 +10588,10 @@ RectTransform:
   - {fileID: 2135099951}
   m_Father: {fileID: 1730168189}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1452326398
 MonoBehaviour:
@@ -10702,7 +10700,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerIndex: 0
-  towerName: {fileID: 0}
   borderImage: {fileID: 1326687289}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -11908,8 +11905,6 @@ MonoBehaviour:
   startWaveButton: {fileID: 1108618342}
   waveInfoText: {fileID: 1096487471}
   buttonText: {fileID: 1531418461}
-  laneWarningPanel: {fileID: 0}
-  laneWarningText: {fileID: 0}
 --- !u!4 &1610570594
 Transform:
   m_ObjectHideFlags: 0

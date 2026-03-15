@@ -16,8 +16,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private Button startWaveButton;
     [SerializeField] private TextMeshProUGUI waveInfoText;
     [SerializeField] private TextMeshProUGUI buttonText;
-    [SerializeField] private GameObject laneWarningPanel;
-    [SerializeField] private TextMeshProUGUI laneWarningText;
 
     private int currentWaveIndex = 0;
     private int enemiesAlive = 0;

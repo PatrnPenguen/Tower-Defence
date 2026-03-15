@@ -7,7 +7,6 @@ public class ShopTowerButton : MonoBehaviour
 {
     [Header("Button Settings")]
     [SerializeField] private int towerIndex;
-    [SerializeField] private TextMeshProUGUI towerName;
 
     [Header("References")]
     [SerializeField] private Image borderImage;

@@ -16,6 +16,12 @@ public class TowerBasics : MonoBehaviour
     [SerializeField] protected int currentLevel = 1;
     [SerializeField] protected int maxLevel = 3;
 
+    [Header("Tower Visuals")]
+    [SerializeField] protected SpriteRenderer baseSpriteRenderer;
+    [SerializeField] protected SpriteRenderer weaponSpriteRenderer;
+    [SerializeField] protected Sprite[] baseLevelSprites;
+    [SerializeField] protected Sprite[] weaponLevelSprites;
+
     [Header("UI")]
     [SerializeField] protected GameObject upgradeUI;
     [SerializeField] protected Button upgradeButton;
@@ -43,6 +49,22 @@ public class TowerBasics : MonoBehaviour
         }
 
         UpdateButtonTexts();
+        UpdateTowerVisual();
+    }
+
+    protected void UpdateTowerVisual()
+    {
+        int spriteIndex = currentLevel - 1;
+
+        if (baseSpriteRenderer != null && baseLevelSprites != null && spriteIndex >= 0 && spriteIndex < baseLevelSprites.Length)
+        {
+            baseSpriteRenderer.sprite = baseLevelSprites[spriteIndex];
+        }
+
+        if (weaponSpriteRenderer != null && weaponLevelSprites != null && spriteIndex >= 0 && spriteIndex < weaponLevelSprites.Length)
+        {
+            weaponSpriteRenderer.sprite = weaponLevelSprites[spriteIndex];
+        }
     }
 
     public virtual void OpenUpgradeUI()
@@ -120,8 +142,11 @@ public class TowerBasics : MonoBehaviour
 
         upgradeCost += 25;
         sellCost += 25;
+        currentLevel++;
 
-        Debug.Log(gameObject.name + " upgraded");
+        UpdateTowerVisual();
+
+        Debug.Log(gameObject.name + " upgraded - basic");
         UpdateButtonTexts();
     }
 }

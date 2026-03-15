@@ -8,8 +8,8 @@ public class Plot : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
 
-    public GameObject towerObj;
-    public TowerBasics tower;
+    [NonSerialized] public GameObject towerObj;
+    [NonSerialized] public TowerBasics tower;
     private Color startColor;
 
     private void Awake()
