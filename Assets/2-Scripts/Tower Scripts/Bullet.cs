@@ -5,12 +5,15 @@ public class Bullet : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private GameObject impactEffectPrefab;
 
     [Header("Attributes")]
     [SerializeField] private float bulletSpeed = 5f;
+    [SerializeField] private float destroyDelayIfNoTarget = 0.5f;
 
     private Transform target;
     private float bulletDamage;
+    private bool isDestroying = false;
 
     public void SetTarget(Transform newTarget, float newDamage)
     {
@@ -22,7 +25,13 @@ public class Bullet : MonoBehaviour
     {
         if (target == null)
         {
-            StartCoroutine(DestroyBulletOverTime());
+            rb.linearVelocity = Vector2.zero;
+
+            if (!isDestroying)
+            {
+                StartCoroutine(DestroyBulletOverTime());
+            }
+
             return;
         }
 
@@ -39,12 +48,24 @@ public class Bullet : MonoBehaviour
             health.TakeDamage(bulletDamage);
         }
 
+        SpawnImpactEffect();
         Destroy(gameObject);
     }
 
     private IEnumerator DestroyBulletOverTime()
     {
-        yield return new WaitForSeconds(0.5f);
+        isDestroying = true;
+        yield return new WaitForSeconds(destroyDelayIfNoTarget);
+
+        SpawnImpactEffect();
         Destroy(gameObject);
+    }
+
+    private void SpawnImpactEffect()
+    {
+        if (impactEffectPrefab != null)
+        {
+            Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

@@ -6,7 +6,6 @@ public class ArcherTower : TowerBasics
     [Header("Archer Tower References")]
     [SerializeField] private Transform turretRotationPoint;
     [SerializeField] private LayerMask enemyMask;
-    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firingPoint;
     [SerializeField] private float rotationSpeed = 200f;
 
@@ -61,6 +60,11 @@ public class ArcherTower : TowerBasics
 
     private void RotateTowardsTarget()
     {
+        if (target == null || turretRotationPoint == null)
+        {
+            return;
+        }
+
         float angle = Mathf.Atan2(
             target.position.y - transform.position.y,
             target.position.x - transform.position.x
@@ -77,14 +81,39 @@ public class ArcherTower : TowerBasics
 
     private bool CheckTargetIsInRange()
     {
-        if (target == null) return false;
+        if (target == null)
+        {
+            return false;
+        }
+
         return Vector2.Distance(target.position, transform.position) <= range;
     }
 
     private void Shoot()
     {
-        GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        Bullet bullet = bulletObj.GetComponent<Bullet>();
+        GameObject projectilePrefab = GetCurrentProjectilePrefab();
+
+        if (projectilePrefab == null)
+        {
+            Debug.LogWarning(gameObject.name + " current level projectile prefab is missing.");
+            return;
+        }
+
+        if (firingPoint == null)
+        {
+            Debug.LogWarning(gameObject.name + " firing point is missing.");
+            return;
+        }
+        
+        PlayWeaponShootAnimation();
+        
+        GameObject projectileObject = Instantiate(
+            projectilePrefab,
+            firingPoint.position,
+            Quaternion.identity
+        );
+
+        Bullet bullet = projectileObject.GetComponent<Bullet>();
 
         if (bullet != null)
         {
@@ -99,7 +128,7 @@ public class ArcherTower : TowerBasics
             Debug.Log("Tower is already at max level");
             return;
         }
-        
+
         if (LevelManager.main.currency < upgradeCost)
         {
             Debug.Log("Not enough money to upgrade");
@@ -117,10 +146,10 @@ public class ArcherTower : TowerBasics
 
         currentLevel++;
 
-        UpdateTowerVisual();
+        ApplyLevelVisuals();
+        UpdateButtonTexts();
 
         Debug.Log("Archer tower upgraded");
-        UpdateButtonTexts();
     }
 
     private void OnDrawGizmosSelected()

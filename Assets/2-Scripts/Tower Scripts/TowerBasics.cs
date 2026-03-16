@@ -2,6 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[System.Serializable]
+public class TowerLevelVisualData
+{
+    public Sprite baseSprite;
+    public RuntimeAnimatorController weaponAnimatorController;
+    public GameObject projectilePrefab;
+}
+
 public class TowerBasics : MonoBehaviour
 {
     [Header("Common Stats")]
@@ -11,16 +19,17 @@ public class TowerBasics : MonoBehaviour
     [SerializeField] protected int buildCost;
     [SerializeField] protected int upgradeCost;
     [SerializeField] protected int sellCost;
-    
+
     [Header("Level Settings")]
     [SerializeField] protected int currentLevel = 1;
     [SerializeField] protected int maxLevel = 3;
 
-    [Header("Tower Visuals")]
+    [Header("Tower Visual References")]
     [SerializeField] protected SpriteRenderer baseSpriteRenderer;
-    [SerializeField] protected SpriteRenderer weaponSpriteRenderer;
-    [SerializeField] protected Sprite[] baseLevelSprites;
-    [SerializeField] protected Sprite[] weaponLevelSprites;
+    [SerializeField] protected Animator weaponAnimator;
+
+    [Header("Level Visual Data")]
+    [SerializeField] protected TowerLevelVisualData[] levelVisuals;
 
     [Header("UI")]
     [SerializeField] protected GameObject upgradeUI;
@@ -35,6 +44,7 @@ public class TowerBasics : MonoBehaviour
     public int BuildCost => buildCost;
     public int UpgradeCost => upgradeCost;
     public int SellCost => sellCost;
+    public int CurrentLevel => currentLevel;
 
     protected virtual void Start()
     {
@@ -48,23 +58,77 @@ public class TowerBasics : MonoBehaviour
             sellButton.onClick.AddListener(SellTower);
         }
 
+        ApplyLevelVisuals();
         UpdateButtonTexts();
-        UpdateTowerVisual();
     }
 
-    protected void UpdateTowerVisual()
+    protected int GetLevelIndex()
     {
-        int spriteIndex = currentLevel - 1;
+        return Mathf.Clamp(currentLevel - 1, 0, maxLevel - 1);
+    }
 
-        if (baseSpriteRenderer != null && baseLevelSprites != null && spriteIndex >= 0 && spriteIndex < baseLevelSprites.Length)
+    protected void ApplyLevelVisuals()
+    {
+        if (levelVisuals == null || levelVisuals.Length == 0)
         {
-            baseSpriteRenderer.sprite = baseLevelSprites[spriteIndex];
+            return;
         }
 
-        if (weaponSpriteRenderer != null && weaponLevelSprites != null && spriteIndex >= 0 && spriteIndex < weaponLevelSprites.Length)
+        int levelIndex = GetLevelIndex();
+
+        if (levelIndex >= levelVisuals.Length)
         {
-            weaponSpriteRenderer.sprite = weaponLevelSprites[spriteIndex];
+            levelIndex = levelVisuals.Length - 1;
         }
+
+        TowerLevelVisualData currentVisualData = levelVisuals[levelIndex];
+
+        if (currentVisualData == null)
+        {
+            return;
+        }
+
+        if (baseSpriteRenderer != null && currentVisualData.baseSprite != null)
+        {
+            baseSpriteRenderer.sprite = currentVisualData.baseSprite;
+        }
+
+        if (weaponAnimator != null && currentVisualData.weaponAnimatorController != null)
+        {
+            weaponAnimator.runtimeAnimatorController = currentVisualData.weaponAnimatorController;
+        }
+    }
+    
+    protected void PlayWeaponShootAnimation()
+    {
+        if (weaponAnimator != null)
+        {
+            weaponAnimator.SetTrigger("Shoot");
+        }
+    }
+
+    protected GameObject GetCurrentProjectilePrefab()
+    {
+        if (levelVisuals == null || levelVisuals.Length == 0)
+        {
+            return null;
+        }
+
+        int levelIndex = GetLevelIndex();
+
+        if (levelIndex >= levelVisuals.Length)
+        {
+            levelIndex = levelVisuals.Length - 1;
+        }
+
+        TowerLevelVisualData currentVisualData = levelVisuals[levelIndex];
+
+        if (currentVisualData == null)
+        {
+            return null;
+        }
+
+        return currentVisualData.projectilePrefab;
     }
 
     public virtual void OpenUpgradeUI()
@@ -82,28 +146,34 @@ public class TowerBasics : MonoBehaviour
             upgradeUI.SetActive(false);
         }
 
-        UIManager.main.SetHoveringState(false);
+        if (UIManager.main != null)
+        {
+            UIManager.main.SetHoveringState(false);
+        }
     }
-    
+
     protected bool CanUpgrade()
     {
         return currentLevel < maxLevel;
     }
-    
+
     protected void UpdateButtonTexts()
     {
         if (upgradeButton != null)
         {
             upgradeButton.interactable = CanUpgrade();
         }
-        
-        if (CanUpgrade())
+
+        if (upgradeButtonText != null)
         {
-            upgradeButtonText.text = "Upgrade" + "\n" + upgradeCost;
-        }
-        else
-        {
-            upgradeButtonText.text = "Max Level";
+            if (CanUpgrade())
+            {
+                upgradeButtonText.text = "Upgrade" + "\n" + upgradeCost;
+            }
+            else
+            {
+                upgradeButtonText.text = "Max Level";
+            }
         }
 
         if (sellButtonText != null)
@@ -111,7 +181,7 @@ public class TowerBasics : MonoBehaviour
             sellButtonText.text = "Sell" + "\n" + sellCost;
         }
     }
-    
+
     public virtual void SellTower()
     {
         LevelManager.main.IncreaseCurrency(sellCost);
@@ -128,6 +198,12 @@ public class TowerBasics : MonoBehaviour
 
     public virtual void UpgradeTower()
     {
+        if (!CanUpgrade())
+        {
+            Debug.Log("Tower is already at max level");
+            return;
+        }
+
         if (LevelManager.main.currency < upgradeCost)
         {
             Debug.Log("Not enough money to upgrade");
@@ -142,11 +218,12 @@ public class TowerBasics : MonoBehaviour
 
         upgradeCost += 25;
         sellCost += 25;
+
         currentLevel++;
 
-        UpdateTowerVisual();
-
-        Debug.Log(gameObject.name + " upgraded - basic");
+        ApplyLevelVisuals();
         UpdateButtonTexts();
+
+        Debug.Log(gameObject.name + " upgraded");
     }
 }
