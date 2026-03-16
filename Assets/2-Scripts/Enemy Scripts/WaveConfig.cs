@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WaveConfig", menuName = "Tower Defense/Wave Config")]
+[CreateAssetMenu(fileName = "WaveConfig", menuName = "Tower Defence/Wave Config")]
 public class WaveConfig : ScriptableObject
 {
     public float startDelay = 0f;

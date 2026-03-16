@@ -366,9 +366,19 @@ MonoBehaviour:
   currentLevel: 1
   maxLevel: 3
   baseSpriteRenderer: {fileID: 2844628651743958307}
-  weaponSpriteRenderer: {fileID: 7095110565500538553}
-  baseLevelSprites: []
-  weaponLevelSprites: []
+  baseLevelSprites:
+  - {fileID: -5901685104126582622, guid: 4f15b6021b7805b49a8f577faf7396e9, type: 3}
+  - {fileID: 1957126396, guid: 4f15b6021b7805b49a8f577faf7396e9, type: 3}
+  - {fileID: -1148917819, guid: 4f15b6021b7805b49a8f577faf7396e9, type: 3}
+  weaponAnimator: {fileID: 1160356261127867848, guid: 825d52fadf6a7794fb805842eea7e25a, type: 3}
+  weaponLevelControllers:
+  - {fileID: 4980388235681923171, guid: 825d52fadf6a7794fb805842eea7e25a, type: 3}
+  - {fileID: -8445444147483732442, guid: 5fd625e8553ac31469316f11da15b085, type: 3}
+  - {fileID: -6342131346294875290, guid: a059e2c60f23cfc48a95d8e7b32b61fa, type: 3}
+  projectileLevelPrefabs:
+  - {fileID: -2253911629886400664, guid: 80d95399660fbde4bb802f12f190acaf, type: 3}
+  - {fileID: -2253911629886400664, guid: 0b2eef7b002d0af419ee07fa14bbdbd9, type: 3}
+  - {fileID: -2253911629886400664, guid: 9d5e1566beae4b144876c85c9902521d, type: 3}
   upgradeUI: {fileID: 5277417836231697555}
   upgradeButton: {fileID: 6767882571108495186}
   sellButton: {fileID: 5776789360564690104}
@@ -378,7 +388,6 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  bulletPrefab: {fileID: 4026965639408915882, guid: 1a74ae73690e8454fbe599a0f18d964d, type: 3}
   firingPoint: {fileID: 1320536363341179625}
   rotationSpeed: 200
 --- !u!1 &5277417836231697555
