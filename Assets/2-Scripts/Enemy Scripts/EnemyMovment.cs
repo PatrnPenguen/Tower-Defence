@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyMovment : MonoBehaviour
@@ -12,6 +13,8 @@ public class EnemyMovment : MonoBehaviour
     private Transform currentTarget;
     private int pathIndex = 0;
     private float baseSpeed;
+    private Coroutine stunCoroutine;
+    private bool isStunned = false;
 
     private void Start()
     {
@@ -42,7 +45,7 @@ public class EnemyMovment : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentTarget == null)
+        if (currentTarget == null || isStunned)
         {
             rb.linearVelocity = Vector2.zero;
             return;
@@ -75,5 +78,26 @@ public class EnemyMovment : MonoBehaviour
     public void ResetSpeed()
     {
         moveSpeed = baseSpeed;
+    }
+
+    public void ApplyStun(float duration)
+    {
+        if (stunCoroutine != null)
+        {
+            StopCoroutine(stunCoroutine);
+        }
+
+        stunCoroutine = StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        isStunned = true;
+        rb.linearVelocity = Vector2.zero;
+
+        yield return new WaitForSeconds(duration);
+
+        isStunned = false;
+        stunCoroutine = null;
     }
 }

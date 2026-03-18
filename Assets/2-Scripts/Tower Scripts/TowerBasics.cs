@@ -27,6 +27,11 @@ public class TowerBasics : MonoBehaviour
     [Header("Tower Visual References")]
     [SerializeField] protected SpriteRenderer baseSpriteRenderer;
     [SerializeField] protected Animator weaponAnimator;
+    
+    [Header("Animation Speed Settings")]
+    [SerializeField] protected float baseWeaponAnimationSpeed = 1f;
+
+    protected float baseAttackSpeed;
 
     [Header("Level Visual Data")]
     [SerializeField] protected TowerLevelVisualData[] levelVisuals;
@@ -48,6 +53,8 @@ public class TowerBasics : MonoBehaviour
 
     protected virtual void Start()
     {
+        baseAttackSpeed = attackSpeed;
+        
         if (upgradeButton != null)
         {
             upgradeButton.onClick.AddListener(UpgradeTower);
@@ -105,6 +112,23 @@ public class TowerBasics : MonoBehaviour
         {
             weaponAnimator.SetTrigger("Shoot");
         }
+    }
+    
+    protected void UpdateWeaponAnimationSpeed()
+    {
+        if (weaponAnimator == null)
+        {
+            return;
+        }
+
+        if (baseAttackSpeed <= 0f)
+        {
+            weaponAnimator.speed = baseWeaponAnimationSpeed;
+            return;
+        }
+
+        float attackSpeedMultiplier = attackSpeed / baseAttackSpeed;
+        weaponAnimator.speed = baseWeaponAnimationSpeed * attackSpeedMultiplier;
     }
 
     protected GameObject GetCurrentProjectilePrefab()
@@ -222,6 +246,7 @@ public class TowerBasics : MonoBehaviour
         currentLevel++;
 
         ApplyLevelVisuals();
+        UpdateWeaponAnimationSpeed();
         UpdateButtonTexts();
 
         Debug.Log(gameObject.name + " upgraded");

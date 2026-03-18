@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEditor;
 
-public class ArcherTower : TowerBasics
+public class CatapultTower : TowerBasics
 {
-    [Header("Archer Tower References")]
+    [Header("Catapult Tower References")]
     [SerializeField] private Transform turretRotationPoint;
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private Transform firingPoint;
     [SerializeField] private float rotationSpeed = 200f;
+
+    [Header("Catapult Special Stats")]
+    [SerializeField] private float splashRadius = 1.5f;
 
     private Transform target;
     private float timeUntilFire;
@@ -104,20 +107,27 @@ public class ArcherTower : TowerBasics
             Debug.LogWarning(gameObject.name + " firing point is missing.");
             return;
         }
-        
+
+        if (target == null)
+        {
+            return;
+        }
+
         PlayWeaponShootAnimation();
-        
+
+        Vector2 targetPosition = target.position;
+
         GameObject projectileObject = Instantiate(
             projectilePrefab,
             firingPoint.position,
             Quaternion.identity
         );
 
-        Bullet bullet = projectileObject.GetComponent<Bullet>();
+        CatapultProjectile projectile = projectileObject.GetComponent<CatapultProjectile>();
 
-        if (bullet != null)
+        if (projectile != null)
         {
-            bullet.SetTarget(target, damage);
+            projectile.SetTargetPosition(targetPosition, damage, splashRadius, enemyMask);
         }
     }
 
@@ -137,20 +147,20 @@ public class ArcherTower : TowerBasics
 
         LevelManager.main.SpendCurrency(upgradeCost);
 
-        damage += 1f;
-        range += 0.5f;
-        attackSpeed += 0.3f;
+        damage += 2f;
+        range += 0.4f;
+        attackSpeed += 0.15f;
+        splashRadius += 0.2f;
 
-        upgradeCost += 30;
-        sellCost += 20;
+        upgradeCost += 40;
+        sellCost += 25;
 
         currentLevel++;
 
         ApplyLevelVisuals();
-        UpdateWeaponAnimationSpeed();
         UpdateButtonTexts();
 
-        Debug.Log("Archer tower upgraded");
+        Debug.Log("Catapult tower upgraded");
     }
 
     private void OnDrawGizmosSelected()

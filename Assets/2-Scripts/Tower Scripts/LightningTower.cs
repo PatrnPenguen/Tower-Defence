@@ -1,13 +1,17 @@
 using UnityEngine;
 using UnityEditor;
 
-public class ArcherTower : TowerBasics
+public class LightningTower : TowerBasics
 {
-    [Header("Archer Tower References")]
+    [Header("Lightning Tower References")]
     [SerializeField] private Transform turretRotationPoint;
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private Transform firingPoint;
     [SerializeField] private float rotationSpeed = 200f;
+
+    [Header("Lightning Special Stats")]
+    [SerializeField] private float splashRadius = 1.2f;
+    [SerializeField] private float stunDuration = 0.5f;
 
     private Transform target;
     private float timeUntilFire;
@@ -104,20 +108,20 @@ public class ArcherTower : TowerBasics
             Debug.LogWarning(gameObject.name + " firing point is missing.");
             return;
         }
-        
+
         PlayWeaponShootAnimation();
-        
+
         GameObject projectileObject = Instantiate(
             projectilePrefab,
             firingPoint.position,
             Quaternion.identity
         );
 
-        Bullet bullet = projectileObject.GetComponent<Bullet>();
+        LightningBullet lightningBullet = projectileObject.GetComponent<LightningBullet>();
 
-        if (bullet != null)
+        if (lightningBullet != null)
         {
-            bullet.SetTarget(target, damage);
+            lightningBullet.SetTarget(target, damage, splashRadius, stunDuration, enemyMask);
         }
     }
 
@@ -138,19 +142,20 @@ public class ArcherTower : TowerBasics
         LevelManager.main.SpendCurrency(upgradeCost);
 
         damage += 1f;
-        range += 0.5f;
-        attackSpeed += 0.3f;
+        range += 0.4f;
+        attackSpeed += 0.2f;
+        splashRadius += 0.15f;
+        stunDuration += 0.1f;
 
-        upgradeCost += 30;
-        sellCost += 20;
+        upgradeCost += 35;
+        sellCost += 25;
 
         currentLevel++;
 
         ApplyLevelVisuals();
-        UpdateWeaponAnimationSpeed();
         UpdateButtonTexts();
 
-        Debug.Log("Archer tower upgraded");
+        Debug.Log("Lightning tower upgraded");
     }
 
     private void OnDrawGizmosSelected()

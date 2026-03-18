@@ -47,7 +47,7 @@ public class Bullet : MonoBehaviour
         {
             health.TakeDamage(bulletDamage);
         }
-
+        
         SpawnImpactEffect();
         Destroy(gameObject);
     }
@@ -56,8 +56,8 @@ public class Bullet : MonoBehaviour
     {
         isDestroying = true;
         yield return new WaitForSeconds(destroyDelayIfNoTarget);
-
-        SpawnImpactEffect();
+        
+        Debug.Log("destroying " + gameObject.name);
         Destroy(gameObject);
     }
 

@@ -2635,7 +2635,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Test Tower
+  m_text: Slow Tower
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5726,10 +5726,10 @@ MonoBehaviour:
   towerPrefabs:
   - towerName: Archer
     prefab: {fileID: 3984585736339696520, guid: ed0a411cb55d00c4cbe268b980f39ede, type: 3}
-  - towerName: Sniper
-    prefab: {fileID: 3984585736339696520, guid: bca971f049c998b4ab10df43231fc266, type: 3}
   - towerName: Froze
     prefab: {fileID: 2432558508241944617, guid: 8768a3e47beae8c488607ac9beed9a53, type: 3}
+  - towerName: Test Tower
+    prefab: {fileID: 3984585736339696520, guid: d69ad5b0ec88a1740a276042aa799b8c, type: 3}
 --- !u!114 &767445845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9743,7 +9743,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1350589978}
   m_Layer: 5
-  m_Name: Sniper
+  m_Name: Slower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12643,7 +12643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1740154865}
   m_Layer: 5
-  m_Name: Slower
+  m_Name: Test Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13961,7 +13961,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Slow Tower
+  m_text: Test Tower
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
