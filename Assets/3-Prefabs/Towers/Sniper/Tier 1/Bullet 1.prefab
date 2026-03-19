@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7080069674553327726}
   - component: {fileID: -2549778058311662061}
   - component: {fileID: 4648051581969477041}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1157046693915479447}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.621, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -168,9 +168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -7080069674553327726}
-  impactEffectPrefab: {fileID: 0}
-  bulletSpeed: 6
+  impactEffectPrefab: {fileID: 3895097414776304024, guid: 187fabfd3fa1f854dafa651e532e4dbb, type: 3}
+  bulletSpeed: 7
   destroyDelayIfNoTarget: 0.5
+  rotationOffset: -90
 --- !u!95 &4648051581969477041
 Animator:
   serializedVersion: 7
@@ -181,7 +182,7 @@ Animator:
   m_GameObject: {fileID: 1157046693915479447}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 988601248025128021, guid: 2e4d8f0e9b9fe784798f01d97f8bfbc6, type: 3}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

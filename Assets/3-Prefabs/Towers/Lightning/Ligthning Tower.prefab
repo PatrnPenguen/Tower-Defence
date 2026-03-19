@@ -336,9 +336,9 @@ Transform:
   m_GameObject: {fileID: 3984585736339696520}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.621, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8609568301759218327}
   - {fileID: 9170029933681188517}
@@ -370,13 +370,13 @@ MonoBehaviour:
   baseWeaponAnimationSpeed: 1
   levelVisuals:
   - baseSprite: {fileID: 2579299117502204163, guid: 2fe17a25c5078b541b86a871c4de8b2f, type: 3}
-    weaponAnimatorController: {fileID: -449561076192086563, guid: 22e47bb5c3a812446b63da2bba11096f, type: 3}
+    weaponAnimatorController: {fileID: 9100000, guid: ead98701a3b70f046b780dfcc0885c67, type: 2}
     projectilePrefab: {fileID: 4926744195779132572, guid: d54bc69b498f182489e8814a8ac0fafd, type: 3}
   - baseSprite: {fileID: 1237229840, guid: 2fe17a25c5078b541b86a871c4de8b2f, type: 3}
-    weaponAnimatorController: {fileID: -623403146904831926, guid: c5c4f6f5216c52145ac3fb602d32d148, type: 3}
+    weaponAnimatorController: {fileID: 9100000, guid: 951a8bfbdef030f41a88ef7cd8bf7483, type: 2}
     projectilePrefab: {fileID: 7100450603377126876, guid: 5a72589dbca8b4546a6b6c06a09624d6, type: 3}
   - baseSprite: {fileID: -725206189, guid: 2fe17a25c5078b541b86a871c4de8b2f, type: 3}
-    weaponAnimatorController: {fileID: -2478945875516855682, guid: d89914706fbd9594698840b7e7225451, type: 3}
+    weaponAnimatorController: {fileID: 9100000, guid: bc5899b64e0d446469a709fca9bd0da6, type: 2}
     projectilePrefab: {fileID: 5743204613555837151, guid: a9c855adcb07875478e3a6aceb6bfc43, type: 3}
   upgradeUI: {fileID: 5277417836231697555}
   upgradeButton: {fileID: 6767882571108495186}
@@ -852,7 +852,7 @@ SpriteRenderer:
   m_Size: {x: 0.28125, y: 0.34375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &4781495340311680556
@@ -935,7 +935,7 @@ Transform:
   m_GameObject: {fileID: 8583969477213382877}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -336,9 +336,9 @@ Transform:
   m_GameObject: {fileID: 3984585736339696520}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.621, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8609568301759218327}
   - {fileID: 9170029933681188517}
@@ -367,6 +367,7 @@ MonoBehaviour:
   maxLevel: 3
   baseSpriteRenderer: {fileID: 2844628651743958307}
   weaponAnimator: {fileID: 4781495340311680556}
+  baseWeaponAnimationSpeed: 1
   levelVisuals:
   - baseSprite: {fileID: -5901685104126582622, guid: 4f15b6021b7805b49a8f577faf7396e9, type: 3}
     weaponAnimatorController: {fileID: 9100000, guid: 936b2af9ed671f045b3a460084f268d1, type: 2}
@@ -932,7 +933,7 @@ Transform:
   m_GameObject: {fileID: 8583969477213382877}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

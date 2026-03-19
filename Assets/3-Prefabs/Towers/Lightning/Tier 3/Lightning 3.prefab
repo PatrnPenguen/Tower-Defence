@@ -101,7 +101,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 5743204613555837151}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
@@ -116,7 +116,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &-8700892622295508310
 CircleCollider2D:
@@ -167,9 +167,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8339261318692208304}
-  impactEffectPrefab: {fileID: 0}
+  impactEffectPrefab: {fileID: 7282621107644438454, guid: 1e63b525caadbe84091014e8d99eaa5c, type: 3}
   bulletSpeed: 6
   destroyDelayIfNoTarget: 0.5
+  rotationOffset: -90
 --- !u!95 &-133182910110758147
 Animator:
   serializedVersion: 7
@@ -180,7 +181,7 @@ Animator:
   m_GameObject: {fileID: 5743204613555837151}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 1064065404218611821, guid: e18a099f97679954b8d71365a6da118f, type: 3}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

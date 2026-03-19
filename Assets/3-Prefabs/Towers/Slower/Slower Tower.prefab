@@ -336,9 +336,9 @@ Transform:
   m_GameObject: {fileID: 3984585736339696520}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.621, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8609568301759218327}
   - {fileID: 9170029933681188517}
@@ -370,14 +370,14 @@ MonoBehaviour:
   baseWeaponAnimationSpeed: 1
   levelVisuals:
   - baseSprite: {fileID: 6201115216396246476, guid: f032cafec74921f4e8611a2428bf6f6e, type: 3}
-    weaponAnimatorController: {fileID: -9039180606432225887, guid: c82ac4bafc63ec94baf45509424c15f7, type: 3}
-    projectilePrefab: {fileID: 0}
+    weaponAnimatorController: {fileID: 9100000, guid: 61885cbf500dd504a860419e49c20a9e, type: 2}
+    projectilePrefab: {fileID: 1265488888997676757, guid: 002d5244681122e4f8bb4602fb419658, type: 3}
   - baseSprite: {fileID: -1630148988, guid: f032cafec74921f4e8611a2428bf6f6e, type: 3}
-    weaponAnimatorController: {fileID: 4978955072718850410, guid: c82709367eed7414cbb588b677a0d654, type: 3}
-    projectilePrefab: {fileID: 0}
+    weaponAnimatorController: {fileID: 9100000, guid: 50f7f4d1a4d287a428d77378e986e9ba, type: 2}
+    projectilePrefab: {fileID: 1265488888997676757, guid: 002d5244681122e4f8bb4602fb419658, type: 3}
   - baseSprite: {fileID: 1638380369, guid: f032cafec74921f4e8611a2428bf6f6e, type: 3}
-    weaponAnimatorController: {fileID: 3722692929854558543, guid: 24a0372944de122479f8c8e9d4e60dcf, type: 3}
-    projectilePrefab: {fileID: 0}
+    weaponAnimatorController: {fileID: 9100000, guid: 69fe7f2281029b74180dbbbe2b171b22, type: 2}
+    projectilePrefab: {fileID: 1265488888997676757, guid: 002d5244681122e4f8bb4602fb419658, type: 3}
   upgradeUI: {fileID: 5277417836231697555}
   upgradeButton: {fileID: 6767882571108495186}
   sellButton: {fileID: 5776789360564690104}
@@ -386,8 +386,10 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  slowEffectSpeed: 0.5
-  slowEffectDuration: 1
+  castPoint: {fileID: 1320536363341179625}
+  slowCooldown: 3
+  slowPercent: 0.3
+  slowDuration: 0.8
 --- !u!1 &5277417836231697555
 GameObject:
   m_ObjectHideFlags: 0

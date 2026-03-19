@@ -16,13 +16,15 @@ MonoBehaviour:
   spawnerEntries:
   - lane: 0
     groups:
-    - enemyPrefab: {fileID: 2925070313628535627, guid: 57367335b7085434fa10770bc0c145a2, type: 3}
-      enemyCount: 6
+    - enemyPrefab: {fileID: 2925070313628535627, guid: 070157c7cce1ed64d914ce07782f4852, type: 3}
+      enemyCount: 40
       timeBetweenSpawns: 1
       delayBeforeGroup: 0
       isBoss: 0
+  - lane: 1
+    groups:
     - enemyPrefab: {fileID: 2925070313628535627, guid: 070157c7cce1ed64d914ce07782f4852, type: 3}
-      enemyCount: 3
-      timeBetweenSpawns: 2
-      delayBeforeGroup: 5
+      enemyCount: 50
+      timeBetweenSpawns: 1
+      delayBeforeGroup: 0
       isBoss: 1

@@ -336,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 3984585736339696520}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.621, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -370,13 +370,13 @@ MonoBehaviour:
   baseWeaponAnimationSpeed: 1
   levelVisuals:
   - baseSprite: {fileID: 9032203404681445082, guid: 41ac4a5c0a862ab4ea27ae32fe8430ef, type: 3}
-    weaponAnimatorController: {fileID: 9026369339663327128, guid: 6815d25ec4f680444bae359183fdc9b6, type: 3}
+    weaponAnimatorController: {fileID: 9100000, guid: 1992cff7fbc24664f9057241d659121d, type: 2}
     projectilePrefab: {fileID: 1157046693915479447, guid: 055fa8c3d3da7494c8fa1e7086c1204a, type: 3}
   - baseSprite: {fileID: 1509927747, guid: 41ac4a5c0a862ab4ea27ae32fe8430ef, type: 3}
-    weaponAnimatorController: {fileID: 8549777051757192523, guid: cf96d0a7583e5ac4ea2cc7eaf1f7f699, type: 3}
+    weaponAnimatorController: {fileID: 9100000, guid: 5b4b5b149c1266045ad8569d34133e3d, type: 2}
     projectilePrefab: {fileID: 1157046693915479447, guid: 16abd7e0c77c03841b93e9cd68d58574, type: 3}
   - baseSprite: {fileID: -823445090, guid: 41ac4a5c0a862ab4ea27ae32fe8430ef, type: 3}
-    weaponAnimatorController: {fileID: 2637569826321597018, guid: 957a664f7ea1d154d99c84fec20550f8, type: 3}
+    weaponAnimatorController: {fileID: 9100000, guid: 750e3a8947231eb41b7db630c72769fd, type: 2}
     projectilePrefab: {fileID: 1157046693915479447, guid: 22c23f8282cef22499317248cad2ae06, type: 3}
   upgradeUI: {fileID: 5277417836231697555}
   upgradeButton: {fileID: 6767882571108495186}

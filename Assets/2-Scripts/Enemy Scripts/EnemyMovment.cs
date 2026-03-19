@@ -14,6 +14,7 @@ public class EnemyMovment : MonoBehaviour
     private int pathIndex = 0;
     private float baseSpeed;
     private Coroutine stunCoroutine;
+    private Coroutine slowCoroutine;
     private bool isStunned = false;
 
     private void Start()
@@ -99,5 +100,25 @@ public class EnemyMovment : MonoBehaviour
 
         isStunned = false;
         stunCoroutine = null;
+    }
+    
+    public void ApplySlowPercent(float slowPercent, float duration)
+    {
+        if (slowCoroutine != null)
+        {
+            StopCoroutine(slowCoroutine);
+        }
+
+        slowCoroutine = StartCoroutine(SlowCoroutine(slowPercent, duration));
+    }
+
+    private IEnumerator SlowCoroutine(float slowPercent, float duration)
+    {
+        moveSpeed = baseSpeed * (1f - slowPercent);
+
+        yield return new WaitForSeconds(duration);
+
+        ResetSpeed();
+        slowCoroutine = null;
     }
 }

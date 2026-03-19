@@ -10,6 +10,7 @@ public class LightningBullet : MonoBehaviour
     [Header("Attributes")]
     [SerializeField] private float bulletSpeed = 6f;
     [SerializeField] private float destroyDelayIfNoTarget = 0.5f;
+    [SerializeField] private float rotationOffset = -90f;
 
     private Transform target;
     private float bulletDamage;
@@ -31,6 +32,8 @@ public class LightningBullet : MonoBehaviour
         splashRadius = newSplashRadius;
         stunDuration = newStunDuration;
         enemyMask = newEnemyMask;
+
+        UpdateBulletRotation();
     }
 
     private void FixedUpdate()
@@ -49,6 +52,21 @@ public class LightningBullet : MonoBehaviour
 
         Vector2 direction = (target.position - transform.position).normalized;
         rb.linearVelocity = direction * bulletSpeed;
+
+        UpdateBulletRotation();
+    }
+
+    private void UpdateBulletRotation()
+    {
+        if (target == null)
+        {
+            return;
+        }
+
+        Vector2 direction = (target.position - transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + rotationOffset;
+
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -61,7 +79,7 @@ public class LightningBullet : MonoBehaviour
     {
         isDestroying = true;
         yield return new WaitForSeconds(destroyDelayIfNoTarget);
-        
+
         Destroy(gameObject);
     }
 
@@ -87,6 +105,7 @@ public class LightningBullet : MonoBehaviour
                 enemyMovement.ApplyStun(stunDuration);
             }
         }
+
         Debug.Log("exploded");
         SpawnImpactEffect();
         Destroy(gameObject);

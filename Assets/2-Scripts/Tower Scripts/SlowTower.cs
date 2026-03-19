@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -7,13 +5,14 @@ public class SlowTower : TowerBasics
 {
     [Header("Slow Tower References")]
     [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private Transform castPoint;
 
     [Header("Slow Tower Special Stats")]
-    [SerializeField] private float slowEffectSpeed = 0.5f;
-    [SerializeField] private float slowEffectDuration = 1f;
+    [SerializeField] private float slowCooldown = 3f;
+    [SerializeField] private float slowPercent = 0.3f;
+    [SerializeField] private float slowDuration = 0.8f;
 
-    private float timeUntilAttack;
-    private Dictionary<EnemyMovment, Coroutine> activeSlowCoroutines = new Dictionary<EnemyMovment, Coroutine>();
+    private float timeUntilCast;
 
     protected override void Start()
     {
@@ -22,69 +21,57 @@ public class SlowTower : TowerBasics
 
     private void Update()
     {
-        timeUntilAttack += Time.deltaTime;
+        timeUntilCast += Time.deltaTime;
 
-        if (timeUntilAttack >= 1f / attackSpeed)
-        {
-            SlowEnemiesInRange();
-            timeUntilAttack = 0f;
-        }
-    }
-
-    private void SlowEnemiesInRange()
-    {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(
-            transform.position,
-            range,
-            Vector2.zero,
-            0f,
-            enemyMask
-        );
-
-        if (hits.Length == 0)
+        if (timeUntilCast < slowCooldown)
         {
             return;
         }
 
-        PlayWeaponShootAnimation();
-
-        for (int i = 0; i < hits.Length; i++)
+        if (!HasEnemyInRange())
         {
-            EnemyMovment enemyMovement = hits[i].transform.GetComponent<EnemyMovment>();
-
-            if (enemyMovement == null)
-            {
-                continue;
-            }
-
-            enemyMovement.UpdateSpeed(slowEffectSpeed);
-
-            if (activeSlowCoroutines.ContainsKey(enemyMovement))
-            {
-                if (activeSlowCoroutines[enemyMovement] != null)
-                {
-                    StopCoroutine(activeSlowCoroutines[enemyMovement]);
-                }
-            }
-
-            Coroutine slowCoroutine = StartCoroutine(ResetEnemySpeedAfterDelay(enemyMovement));
-            activeSlowCoroutines[enemyMovement] = slowCoroutine;
+            return;
         }
+
+        CastSlowRing();
+        timeUntilCast = 0f;
     }
 
-    private IEnumerator ResetEnemySpeedAfterDelay(EnemyMovment enemyMovement)
+    public float GetSlowPercent()
     {
-        yield return new WaitForSeconds(slowEffectDuration);
+        return slowPercent;
+    }
 
-        if (enemyMovement != null)
+    public float GetSlowDuration()
+    {
+        return slowDuration;
+    }
+
+    private bool HasEnemyInRange()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(
+            transform.position,
+            range,
+            enemyMask
+        );
+
+        return hit != null;
+    }
+
+    private void CastSlowRing()
+    {
+        GameObject ringPrefab = GetCurrentProjectilePrefab();
+
+        if (ringPrefab == null)
         {
-            enemyMovement.ResetSpeed();
+            Debug.LogWarning(gameObject.name + " current level ring prefab is missing.");
+            return;
         }
 
-        if (enemyMovement != null && activeSlowCoroutines.ContainsKey(enemyMovement))
-        {
-            activeSlowCoroutines.Remove(enemyMovement);
-        }
+        Vector3 spawnPosition = castPoint != null ? castPoint.position : transform.position;
+
+        PlayWeaponShootAnimation();
+        Instantiate(ringPrefab, spawnPosition, Quaternion.identity);
     }
 
     public override void UpgradeTower()
@@ -102,16 +89,19 @@ public class SlowTower : TowerBasics
         }
 
         LevelManager.main.SpendCurrency(upgradeCost);
-
-        range += 0.4f;
-        attackSpeed += 0.15f;
-        slowEffectDuration += 0.25f;
-
-        if (slowEffectSpeed > 0.2f)
+        
+        slowCooldown -= 0.3f;
+        if (slowCooldown < 1.5f)
         {
-            slowEffectSpeed -= 0.05f;
+            slowCooldown = 1.5f;
         }
-
+        
+        slowDuration += 0.1f;
+        if (slowDuration < 0.6f)
+        {
+            slowDuration = 0.6f;
+        }
+        
         upgradeCost += 30;
         sellCost += 20;
 

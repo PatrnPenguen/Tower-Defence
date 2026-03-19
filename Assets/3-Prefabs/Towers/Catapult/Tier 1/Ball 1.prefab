@@ -30,9 +30,9 @@ Transform:
   m_GameObject: {fileID: 62375298166043998}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.621, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -125,8 +125,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.04}
-  m_Radius: 0.04
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.03125
 --- !u!50 &-313119489461397389
 Rigidbody2D:
   serializedVersion: 5
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -313119489461397389}
-  impactEffectPrefab: {fileID: 0}
+  impactEffectPrefab: {fileID: 38881370864865474, guid: c9913729046925c49b9dac1a0df38e41, type: 3}
   projectileSpeed: 4
   hitDistance: 0.1
 --- !u!95 &-2130764075553559145
@@ -180,7 +180,7 @@ Animator:
   m_GameObject: {fileID: 62375298166043998}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: -6250668733278783127, guid: 71c1c97c99274784abb4719e95fe0608, type: 3}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
