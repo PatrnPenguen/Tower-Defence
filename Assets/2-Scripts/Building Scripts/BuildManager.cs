@@ -31,6 +31,16 @@ public class BuildManager : MonoBehaviour
         return towerPrefabs[selectedTowerIndex];
     }
 
+    public TowerData GetTowerDataByIndex(int towerIndex)
+    {
+        if (towerIndex < 0 || towerIndex >= towerPrefabs.Length)
+        {
+            return null;
+        }
+
+        return towerPrefabs[towerIndex];
+    }
+
     public void SetSelectedTower(int towerIndex)
     {
         if (towerIndex < 0 || towerIndex >= towerPrefabs.Length)

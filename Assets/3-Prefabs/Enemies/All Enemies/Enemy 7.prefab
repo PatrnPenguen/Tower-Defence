@@ -78,9 +78,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 312756135
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: -3826975331268675407, guid: d33cf127dac8bbf45af2360144a1eadb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -153,8 +153,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.2265625
+  m_Offset: {x: 0, y: -0.01214242}
+  m_Radius: 0.15977931
 --- !u!114 &4122173094283199744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +171,8 @@ MonoBehaviour:
   animator: {fileID: -4057798282937278010}
   enemyCollider: {fileID: 7939095244555862419}
   spriteRenderer: {fileID: 1092566638303368684}
-  moveSpeed: 2
+  health: {fileID: -5995375711256812119}
+  moveSpeed: 1.75
   deathDestroyDelay: 0.8
   currentLookDirection: 1
 --- !u!114 &-5995375711256812119
@@ -186,8 +187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899f0678b13a0ca44a1b5019821a49b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitpoints: 2
-  currencyWorth: 50
+  hitpoints: 40
+  currencyWorth: 200
+  endpointDamage: 4
   enemyMovment: {fileID: 4122173094283199744}
   deathBloodEffectPrefab: {fileID: 8129555082982158623, guid: 08dbb7f97cc23874c992f98decefc28e, type: 3}
 --- !u!95 &-4057798282937278010

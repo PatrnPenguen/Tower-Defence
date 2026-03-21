@@ -13,4 +13,11 @@ MonoBehaviour:
   m_Name: Wave 2
   m_EditorClassIdentifier: 
   startDelay: 2
-  spawnerEntries: []
+  spawnerEntries:
+  - lane: 1
+    groups:
+    - enemyPrefab: {fileID: 2925070313628535627, guid: 43dca8042c1b1d2419c33d304c687d0a, type: 3}
+      enemyCount: 3
+      timeBetweenSpawns: 0.5
+      delayBeforeGroup: 0
+      isBoss: 1

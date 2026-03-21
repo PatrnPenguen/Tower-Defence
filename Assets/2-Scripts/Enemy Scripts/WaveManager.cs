@@ -72,11 +72,16 @@ public class WaveManager : MonoBehaviour
         if (currentWaveIndex >= waves.Length)
         {
             allWavesFinished = true;
+
+            if (LevelManager.main != null && !LevelManager.main.IsGameEnded())
+            {
+                LevelManager.main.WinLevel();
+            }
         }
 
         RefreshUI();
     }
-    
+
     private EnemySpawner GetSpawnerByLane(SpawnerLane lane)
     {
         for (int i = 0; i < sceneSpawners.Length; i++)
@@ -180,9 +185,14 @@ public class WaveManager : MonoBehaviour
             main.enemiesAlive = 0;
         }
     }
-    
+
     public void StartNextWave()
     {
+        if (LevelManager.main != null && LevelManager.main.IsGameEnded())
+        {
+            return;
+        }
+
         if (waveInProgress)
         {
             return;
@@ -203,7 +213,7 @@ public class WaveManager : MonoBehaviour
         HideAllLaneWarnings();
         StartCoroutine(RunWave(waves[currentWaveIndex]));
     }
-    
+
     private void ShowWarningsForCurrentWave()
     {
         HideAllLaneWarnings();
@@ -247,14 +257,16 @@ public class WaveManager : MonoBehaviour
             if (hasBoss)
             {
                 targetSpawner.ShowBossWarning();
+                print("boss");
             }
             else
             {
                 targetSpawner.ShowNormalWarning();
+                print("normal");
             }
         }
     }
-    
+
     private void HideAllLaneWarnings()
     {
         if (sceneSpawners == null)
@@ -273,7 +285,8 @@ public class WaveManager : MonoBehaviour
 
     private void RefreshUI()
     {
-        bool showPreWaveUI = !waveInProgress && !allWavesFinished;
+        bool gameEnded = LevelManager.main != null && LevelManager.main.IsGameEnded();
+        bool showPreWaveUI = !waveInProgress && !allWavesFinished && !gameEnded;
 
         if (startWaveButtonObject != null)
         {
@@ -282,23 +295,19 @@ public class WaveManager : MonoBehaviour
 
         if (waveInfoText != null)
         {
-            if (allWavesFinished)
+            if (allWavesFinished || gameEnded)
             {
-                waveInfoText.text = "All waves completed";
-            }
-            else if (waveInProgress)
-            {
-                waveInfoText.text = "Wave " + (currentWaveIndex + 1) + " is running";
+                waveInfoText.text = "WAVES: " + (currentWaveIndex) + "/" + waves.Length;
             }
             else
             {
-                waveInfoText.text = "Ready for Wave " + (currentWaveIndex + 1);
+                waveInfoText.text = "WAVES: " + (currentWaveIndex + 1) + "/" + waves.Length;
             }
         }
 
-        if (buttonText != null && !allWavesFinished)
+        if (buttonText != null && !allWavesFinished && !gameEnded)
         {
-            buttonText.text = "Start Wave " + (currentWaveIndex + 1);
+            buttonText.text = "NEXT WAVE";
         }
 
         if (showPreWaveUI)

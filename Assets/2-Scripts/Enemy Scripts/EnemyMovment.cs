@@ -16,6 +16,7 @@ public class EnemyMovment : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Collider2D enemyCollider;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Health health;
 
     [Header("Attributes")]
     [SerializeField] private float moveSpeed = 2f;
@@ -56,8 +57,7 @@ public class EnemyMovment : MonoBehaviour
 
             if (currentPath == null || pathIndex >= currentPath.Length)
             {
-                WaveManager.OnEnemyRemovedFromWave();
-                Destroy(gameObject);
+                ReachEndPoint();
                 return;
             }
 
@@ -188,6 +188,32 @@ public class EnemyMovment : MonoBehaviour
         }
 
         StartCoroutine(DestroyAfterDeath());
+    }
+
+    private void ReachEndPoint()
+    {
+        if (isDead)
+        {
+            return;
+        }
+
+        isDead = true;
+        rb.linearVelocity = Vector2.zero;
+
+        int damageToBase = 1;
+
+        if (health != null)
+        {
+            damageToBase = health.GetEndpointDamage();
+        }
+
+        if (LevelManager.main != null)
+        {
+            LevelManager.main.TakeDamage(damageToBase);
+        }
+
+        WaveManager.OnEnemyRemovedFromWave();
+        Destroy(gameObject);
     }
 
     private IEnumerator DestroyAfterDeath()

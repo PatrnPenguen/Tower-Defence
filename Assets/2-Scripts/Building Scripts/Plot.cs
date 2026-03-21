@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Plot : MonoBehaviour
@@ -7,10 +8,13 @@ public class Plot : MonoBehaviour
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
+    [SerializeField] private Color towerBuildColor;
+    [SerializeField] private GameObject notEnoughMoneyText;
 
     [NonSerialized] public GameObject towerObj;
     [NonSerialized] public TowerBasics tower;
     private Color startColor;
+    private bool isTowerBuilded = false;
 
     private void Awake()
     {
@@ -31,53 +35,56 @@ public class Plot : MonoBehaviour
 
     private void OnMouseExit()
     {
-        sr.color = startColor;
+        sr.color = isTowerBuilded ? towerBuildColor : startColor;
     }
 
     private void OnMouseDown()
+{
+    if (UIManager.main.IsHoveringUI()) return;
+
+    if (LevelManager.main != null && LevelManager.main.IsGameEnded())
     {
-        if (UIManager.main.IsHoveringUI()) return;
-
-        if (towerObj != null)
-        {
-            if (tower != null)
-            {
-                tower.OpenUpgradeUI();
-            }
-            return;
-        }
-
-        if (!BuildManager.main.HasTowerSelected())
-        {
-            return;
-        }
-
-        TowerData towerToBuild = BuildManager.main.GetSelectedTower();
-
-        if (towerToBuild == null || towerToBuild.prefab == null)
-        {
-            return;
-        }
-
-        TowerBasics towerBasics = towerToBuild.prefab.GetComponent<TowerBasics>();
-
-        if (towerBasics == null)
-        {
-            Debug.LogError("Selected tower prefab does not have TowerBasics on it.");
-            return;
-        }
-
-        if (towerBasics.BuildCost > LevelManager.main.currency)
-        {
-            Debug.Log("Not enough money");
-            return;
-        }
-
-        LevelManager.main.SpendCurrency(towerBasics.BuildCost);
-
-        towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
-        tower = towerObj.GetComponent<TowerBasics>();
-
-        BuildManager.main.ClearSelectedTower();
+        return;
     }
+
+    if (towerObj != null)
+    {
+        if (tower != null)
+        {
+            tower.OpenUpgradeUI();
+        }
+        return;
+    }
+
+    if (!BuildManager.main.HasTowerSelected())
+    {
+        return;
+    }
+
+    TowerData towerToBuild = BuildManager.main.GetSelectedTower();
+
+    if (towerToBuild == null || towerToBuild.prefab == null)
+    {
+        return;
+    }
+
+    TowerBasics towerBasics = towerToBuild.prefab.GetComponent<TowerBasics>();
+
+    if (towerBasics.BuildCost > LevelManager.main.currency)
+    {
+        if (notEnoughMoneyText != null)
+        {
+            Instantiate(notEnoughMoneyText, transform.position, Quaternion.identity);
+        }
+        return;
+    }
+
+    LevelManager.main.SpendCurrency(towerBasics.BuildCost);
+
+    towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
+    tower = towerObj.GetComponent<TowerBasics>();
+    sr.color = towerBuildColor;
+    isTowerBuilded = true;
+    BuildManager.main.ClearSelectedTower();
+}
 }

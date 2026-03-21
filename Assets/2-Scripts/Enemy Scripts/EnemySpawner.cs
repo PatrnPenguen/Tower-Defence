@@ -21,7 +21,6 @@ public class EnemySpawner : MonoBehaviour
 
         if (pathPoints == null || pathPoints.Length == 0)
         {
-            Debug.LogWarning(gameObject.name + " has no path points assigned.");
             return;
         }
 
