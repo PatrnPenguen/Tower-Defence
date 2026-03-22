@@ -106,7 +106,6 @@ public class WaveManager : MonoBehaviour
 
         if (targetSpawner == null)
         {
-            Debug.LogWarning("No spawner found for lane: " + entry.lane);
             yield break;
         }
 
@@ -297,11 +296,11 @@ public class WaveManager : MonoBehaviour
         {
             if (allWavesFinished || gameEnded)
             {
-                waveInfoText.text = "WAVES: " + (currentWaveIndex) + "/" + waves.Length;
+                waveInfoText.text = "WAVE: " + (currentWaveIndex) + "/" + waves.Length;
             }
             else
             {
-                waveInfoText.text = "WAVES: " + (currentWaveIndex + 1) + "/" + waves.Length;
+                waveInfoText.text = "WAVE: " + (currentWaveIndex + 1) + "/" + waves.Length;
             }
         }
 

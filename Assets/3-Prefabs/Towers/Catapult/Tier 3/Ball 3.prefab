@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -313119489461397389}
-  impactEffectPrefab: {fileID: 0}
+  impactEffectPrefab: {fileID: 406268019559847784, guid: 07fa33278bf982643be302e13fafd34c, type: 3}
   projectileSpeed: 4
   hitDistance: 0.1
 --- !u!95 &-2130764075553559145

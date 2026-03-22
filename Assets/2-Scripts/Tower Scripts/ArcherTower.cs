@@ -95,13 +95,11 @@ public class ArcherTower : TowerBasics
 
         if (projectilePrefab == null)
         {
-            Debug.LogWarning(gameObject.name + " current level projectile prefab is missing.");
             return;
         }
 
         if (firingPoint == null)
         {
-            Debug.LogWarning(gameObject.name + " firing point is missing.");
             return;
         }
         
@@ -125,32 +123,28 @@ public class ArcherTower : TowerBasics
     {
         if (!CanUpgrade())
         {
-            Debug.Log("Tower is already at max level");
             return;
         }
 
         if (LevelManager.main.currency < upgradeCost)
         {
-            Debug.Log("Not enough money to upgrade");
             return;
         }
 
         LevelManager.main.SpendCurrency(upgradeCost);
 
-        damage += 1f;
-        range += 0.5f;
-        attackSpeed += 0.3f;
+        damage += damageUp;
+        range += rangeUp;
+        attackSpeed += attackSpeedUp;
 
-        upgradeCost += 30;
-        sellCost += 20;
+        upgradeCost += upgradeCostUp;
+        sellCost += sellCostUp;
 
         currentLevel++;
 
         ApplyLevelVisuals();
         UpdateWeaponAnimationSpeed();
         UpdateButtonTexts();
-
-        Debug.Log("Archer tower upgraded");
     }
 
     private void OnDrawGizmosSelected()

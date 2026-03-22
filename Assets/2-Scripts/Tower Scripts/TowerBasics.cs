@@ -19,6 +19,13 @@ public class TowerBasics : MonoBehaviour
     [SerializeField] protected int buildCost;
     [SerializeField] protected int upgradeCost;
     [SerializeField] protected int sellCost;
+    
+    [Header("Common Stats Upgrades")]
+    [SerializeField] protected float damageUp = 1f;
+    [SerializeField] protected float rangeUp = 0.3f;
+    [SerializeField] protected float attackSpeedUp = 0.2f;
+    [SerializeField] protected int upgradeCostUp = 25;
+    [SerializeField] protected int sellCostUp = 25;
 
     [Header("Level Settings")]
     [SerializeField] protected int currentLevel = 1;
@@ -27,11 +34,13 @@ public class TowerBasics : MonoBehaviour
     [Header("Tower Visual References")]
     [SerializeField] protected SpriteRenderer baseSpriteRenderer;
     [SerializeField] protected Animator weaponAnimator;
-    
+    [SerializeField] protected GameObject rangeIndicator;
+
     [Header("Animation Speed Settings")]
     [SerializeField] protected float baseWeaponAnimationSpeed = 1f;
 
     protected float baseAttackSpeed;
+    protected Plot ownerPlot;
 
     [Header("Level Visual Data")]
     [SerializeField] protected TowerLevelVisualData[] levelVisuals;
@@ -42,6 +51,8 @@ public class TowerBasics : MonoBehaviour
     [SerializeField] protected Button sellButton;
     [SerializeField] protected TextMeshProUGUI upgradeButtonText;
     [SerializeField] protected TextMeshProUGUI sellButtonText;
+
+    private static TowerBasics selectedTower;
 
     public float Damage => damage;
     public float Range => range;
@@ -54,7 +65,7 @@ public class TowerBasics : MonoBehaviour
     protected virtual void Start()
     {
         baseAttackSpeed = attackSpeed;
-        
+
         if (upgradeButton != null)
         {
             upgradeButton.onClick.AddListener(UpgradeTower);
@@ -66,7 +77,19 @@ public class TowerBasics : MonoBehaviour
         }
 
         ApplyLevelVisuals();
+        UpdateWeaponAnimationSpeed();
         UpdateButtonTexts();
+        HideRange();
+
+        if (upgradeUI != null)
+        {
+            upgradeUI.SetActive(false);
+        }
+    }
+
+    public void SetOwnerPlot(Plot plot)
+    {
+        ownerPlot = plot;
     }
 
     protected int GetLevelIndex()
@@ -157,6 +180,13 @@ public class TowerBasics : MonoBehaviour
 
     public virtual void OpenUpgradeUI()
     {
+        if (selectedTower != null && selectedTower != this)
+        {
+            selectedTower.CloseUpgradeUI();
+        }
+
+        selectedTower = this;
+
         if (upgradeUI != null)
         {
             upgradeUI.SetActive(true);
@@ -170,9 +200,22 @@ public class TowerBasics : MonoBehaviour
             upgradeUI.SetActive(false);
         }
 
+        if (selectedTower == this)
+        {
+            selectedTower = null;
+        }
+
         if (UIManager.main != null)
         {
             UIManager.main.SetHoveringState(false);
+        }
+    }
+
+    public static void CloseSelectedTowerUI()
+    {
+        if (selectedTower != null)
+        {
+            selectedTower.CloseUpgradeUI();
         }
     }
 
@@ -210,13 +253,13 @@ public class TowerBasics : MonoBehaviour
     {
         LevelManager.main.IncreaseCurrency(sellCost);
 
-        if (Plot.main != null)
+        if (ownerPlot != null)
         {
-            Plot.main.towerObj = null;
-            Plot.main.tower = null;
+            ownerPlot.ClearPlot();
         }
 
         CloseUpgradeUI();
+        HideRange();
         Destroy(gameObject);
     }
 
@@ -224,24 +267,22 @@ public class TowerBasics : MonoBehaviour
     {
         if (!CanUpgrade())
         {
-            Debug.Log("Tower is already at max level");
             return;
         }
 
         if (LevelManager.main.currency < upgradeCost)
         {
-            Debug.Log("Not enough money to upgrade");
             return;
         }
 
         LevelManager.main.SpendCurrency(upgradeCost);
 
-        damage += 1f;
-        range += 0.3f;
-        attackSpeed += 0.2f;
+        damage += damageUp;
+        range += rangeUp;
+        attackSpeed += attackSpeedUp;
 
-        upgradeCost += 25;
-        sellCost += 25;
+        upgradeCost += upgradeCostUp;
+        sellCost += sellCostUp;
 
         currentLevel++;
 
@@ -249,6 +290,59 @@ public class TowerBasics : MonoBehaviour
         UpdateWeaponAnimationSpeed();
         UpdateButtonTexts();
 
-        Debug.Log(gameObject.name + " upgraded");
+        if (rangeIndicator != null && rangeIndicator.activeSelf)
+        {
+            ShowRange();
+        }
+    }
+    
+    public void ShowRange()
+    {
+        if (rangeIndicator == null)
+        {
+            return;
+        }
+
+        rangeIndicator.SetActive(true);
+
+        float diameter = range;
+        rangeIndicator.transform.localScale = new Vector3(diameter, diameter, 1f);
+    }
+
+    public void HideRange()
+    {
+        if (rangeIndicator == null)
+        {
+            return;
+        }
+
+        rangeIndicator.SetActive(false);
+    }
+
+    public bool IsRangeVisible()
+    {
+        if (rangeIndicator == null)
+        {
+            return false;
+        }
+
+        return rangeIndicator.activeSelf;
+    }
+
+    public void ToggleRange()
+    {
+        if (rangeIndicator == null)
+        {
+            return;
+        }
+
+        if (rangeIndicator.activeSelf)
+        {
+            HideRange();
+        }
+        else
+        {
+            ShowRange();
+        }
     }
 }

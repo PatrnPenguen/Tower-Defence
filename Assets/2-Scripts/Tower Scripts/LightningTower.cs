@@ -12,6 +12,10 @@ public class LightningTower : TowerBasics
     [Header("Lightning Special Stats")]
     [SerializeField] private float splashRadius = 1.2f;
     [SerializeField] private float stunDuration = 0.5f;
+    
+    [Header("Lightning Special Stats Upgrade")]
+    [SerializeField] private float stunDurationUp = 0.5f;
+
 
     private Transform target;
     private float timeUntilFire;
@@ -141,21 +145,18 @@ public class LightningTower : TowerBasics
 
         LevelManager.main.SpendCurrency(upgradeCost);
 
-        damage += 1f;
-        range += 0.4f;
-        attackSpeed += 0.2f;
-        splashRadius += 0.15f;
-        stunDuration += 0.1f;
+        damage += damageUp;
+        range += rangeUp;
+        attackSpeed += attackSpeedUp;
+        stunDuration += stunDurationUp;
 
-        upgradeCost += 35;
-        sellCost += 25;
+        upgradeCost += upgradeCostUp;
+        sellCost += sellCostUp;
 
         currentLevel++;
 
         ApplyLevelVisuals();
         UpdateButtonTexts();
-
-        Debug.Log("Lightning tower upgraded");
     }
 
     private void OnDrawGizmosSelected()

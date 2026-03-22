@@ -11,6 +11,9 @@ public class CatapultTower : TowerBasics
 
     [Header("Catapult Special Stats")]
     [SerializeField] private float splashRadius = 1.5f;
+    
+    [Header("Catapult Special Stats Upgrade")]
+    [SerializeField] private float splashRadiusUp = 0.5f;
 
     private Transform target;
     private float timeUntilFire;
@@ -147,20 +150,18 @@ public class CatapultTower : TowerBasics
 
         LevelManager.main.SpendCurrency(upgradeCost);
 
-        damage += 2f;
-        range += 0.4f;
-        attackSpeed += 0.15f;
-        splashRadius += 0.2f;
+        damage += damageUp;
+        range += rangeUp;
+        attackSpeed += attackSpeedUp;
+        splashRadius += splashRadiusUp;
 
-        upgradeCost += 40;
-        sellCost += 25;
+        upgradeCost += upgradeCostUp;
+        sellCost += sellCostUp;
 
         currentLevel++;
 
         ApplyLevelVisuals();
         UpdateButtonTexts();
-
-        Debug.Log("Catapult tower upgraded");
     }
 
     private void OnDrawGizmosSelected()

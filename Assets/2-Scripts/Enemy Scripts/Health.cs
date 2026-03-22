@@ -10,12 +10,27 @@ public class Health : MonoBehaviour
     [Header("References")]
     [SerializeField] private EnemyMovment enemyMovment;
     [SerializeField] private GameObject deathBloodEffectPrefab;
+    [SerializeField] private EnemyHealthBar healthBar;
 
     private bool isDestroyed = false;
+    private float maxHitpoints;
+
+    private void Start()
+    {
+        maxHitpoints = hitpoints;
+        UpdateHealthBar();
+    }
 
     public int GetEndpointDamage()
     {
         return endpointDamage;
+    }
+
+    public void IncreaseHealthByPercent(float percent)
+    {
+        hitpoints += hitpoints * (percent / 100f);
+        maxHitpoints = hitpoints;
+        UpdateHealthBar();
     }
 
     public void TakeDamage(float damage)
@@ -26,6 +41,7 @@ public class Health : MonoBehaviour
         }
 
         hitpoints -= damage;
+        UpdateHealthBar();
 
         if (hitpoints <= 0f)
         {
@@ -51,6 +67,14 @@ public class Health : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealthBar(hitpoints, maxHitpoints);
         }
     }
 }

@@ -6,6 +6,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private SpawnerLane lane;
     [SerializeField] private Transform[] pathPoints;
 
+    [Header("Health Scaling")]
+    [SerializeField] private float healthIncreasePercentPer5Waves = 20f;
+
     [Header("Warning")]
     [SerializeField] private GameObject normalWarningObject;
     [SerializeField] private GameObject bossWarningObject;
@@ -27,6 +30,17 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPosition = pathPoints[0].position;
 
         GameObject enemyObject = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+        Health health = enemyObject.GetComponent<Health>();
+
+        if (health != null && WaveManager.main != null)
+        {
+            int currentWave = WaveManager.main.GetCurrentWaveNumber();
+            int bonusStep = (currentWave - 1) / 5;
+            float totalPercentBonus = bonusStep * healthIncreasePercentPer5Waves;
+
+            health.IncreaseHealthByPercent(totalPercentBonus);
+        }
 
         EnemyMovment enemyMovment = enemyObject.GetComponent<EnemyMovment>();
 

@@ -1,19 +1,18 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ShopTowerButton : MonoBehaviour
+public class ShopTowerButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Button Settings")]
     [SerializeField] private int towerIndex;
 
     [Header("References")]
-    [SerializeField] private Image borderImage;
+    [SerializeField] private GameObject selectedObject;
     [SerializeField] private TextMeshProUGUI buttonText;
 
-    [Header("Colors")]
-    [SerializeField] private Color normalColor = Color.white;
-    [SerializeField] private Color selectedColor = Color.yellow;
+    [Header("Hover Info")]
+    [SerializeField] private HoverPanelTracker hoverPanelTracker;
 
     private void Start()
     {
@@ -28,16 +27,12 @@ public class ShopTowerButton : MonoBehaviour
 
     public void RefreshVisual()
     {
-        if (borderImage == null) return;
+        if (selectedObject == null)
+        {
+            return;
+        }
 
-        if (BuildManager.main.IsTowerSelected(towerIndex))
-        {
-            borderImage.color = selectedColor;
-        }
-        else
-        {
-            borderImage.color = normalColor;
-        }
+        selectedObject.SetActive(BuildManager.main.IsTowerSelected(towerIndex));
     }
 
     private void UpdateButtonText()
@@ -64,5 +59,21 @@ public class ShopTowerButton : MonoBehaviour
         }
 
         buttonText.text = towerData.towerName + "\n" + towerBasics.BuildCost;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (hoverPanelTracker != null)
+        {
+            hoverPanelTracker.ForceShow();
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (hoverPanelTracker != null)
+        {
+            hoverPanelTracker.ForceHide();
+        }
     }
 }
