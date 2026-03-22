@@ -10420,6 +10420,29 @@ MonoBehaviour:
   waves:
   - {fileID: 11400000, guid: 170894d13542c1c4aabea79fd476d6db, type: 2}
   - {fileID: 11400000, guid: 70ac787b9fd57534c8656f2cf98b44a7, type: 2}
+  - {fileID: 11400000, guid: b456c67cb48c83549981c4e048280085, type: 2}
+  - {fileID: 11400000, guid: d0063c2214ce5a341b7b65d4fa1fff6b, type: 2}
+  - {fileID: 11400000, guid: 6f46a3a108b703c4486f00642b606b8c, type: 2}
+  - {fileID: 11400000, guid: bf62dca990e3dd445adbd55a13a51d04, type: 2}
+  - {fileID: 11400000, guid: e377aebc69eb96b4983651d0e1b2321e, type: 2}
+  - {fileID: 11400000, guid: fd81862a5e9a97e4f84e689f2cbad359, type: 2}
+  - {fileID: 11400000, guid: 526878bad6886f745bf7385eaf2ab7d7, type: 2}
+  - {fileID: 11400000, guid: 7862ffc2046ab6146abd3213b21221a9, type: 2}
+  - {fileID: 11400000, guid: d041528c11324dd4287c224b91e8acb1, type: 2}
+  - {fileID: 11400000, guid: 5c0585ec54fc27745aea11885f4c9f44, type: 2}
+  - {fileID: 11400000, guid: 8552a53254dc57d40aee0cb799607ad2, type: 2}
+  - {fileID: 11400000, guid: 1fcf09b252d15d94a9afa7467d0364d7, type: 2}
+  - {fileID: 11400000, guid: 04791599a72154546a75b365cd0f6cca, type: 2}
+  - {fileID: 11400000, guid: e9c6d293c6f0bb04084fefd2a5aeaacf, type: 2}
+  - {fileID: 11400000, guid: d81563aecd1555e479c954ba07fe981f, type: 2}
+  - {fileID: 11400000, guid: 7ea48805398459049b1ab62b56a06c2c, type: 2}
+  - {fileID: 11400000, guid: 82f29ac64168a0340a3f0e15b4e7e21b, type: 2}
+  - {fileID: 11400000, guid: 8db5e080ffd90234bab918b15534c408, type: 2}
+  - {fileID: 11400000, guid: a6eecef827fe4fc4d9a1294ac36adef4, type: 2}
+  - {fileID: 11400000, guid: c717504d2bb9cd84fac3b6f52f6630ff, type: 2}
+  - {fileID: 11400000, guid: da133341e17c4fe4ca5bee9bd04875f9, type: 2}
+  - {fileID: 11400000, guid: e3ef0e06e6d5b1d45aa60411a7e30ba0, type: 2}
+  - {fileID: 11400000, guid: b98905864f6e7b248a2d49dad9ce943a, type: 2}
   sceneSpawners:
   - {fileID: 550609101}
   - {fileID: 512867719}
