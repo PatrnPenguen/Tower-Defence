@@ -19,8 +19,10 @@ public class ArcherTower : TowerBasics
 
     private void Update()
     {
-        if (target == null)
+        UpdateButtonTexts();
+        if (!IsTargetValid())
         {
+            target = null;
             FindTarget();
             return;
         }
@@ -52,10 +54,52 @@ public class ArcherTower : TowerBasics
             enemyMask
         );
 
-        if (hits.Length > 0)
+        for (int i = 0; i < hits.Length; i++)
         {
-            target = hits[0].transform;
+            Transform possibleTarget = hits[i].transform;
+
+            if (possibleTarget == null)
+            {
+                continue;
+            }
+
+            EnemyMovment enemyMovment = possibleTarget.GetComponent<EnemyMovment>();
+
+            if (enemyMovment == null)
+            {
+                enemyMovment = possibleTarget.GetComponentInParent<EnemyMovment>();
+            }
+
+            if (enemyMovment != null && !enemyMovment.IsDead)
+            {
+                target = possibleTarget;
+                return;
+            }
         }
+
+        target = null;
+    }
+
+    private bool IsTargetValid()
+    {
+        if (target == null)
+        {
+            return false;
+        }
+
+        EnemyMovment enemyMovment = target.GetComponent<EnemyMovment>();
+
+        if (enemyMovment == null)
+        {
+            enemyMovment = target.GetComponentInParent<EnemyMovment>();
+        }
+
+        if (enemyMovment == null)
+        {
+            return false;
+        }
+
+        return !enemyMovment.IsDead;
     }
 
     private void RotateTowardsTarget()
@@ -91,6 +135,12 @@ public class ArcherTower : TowerBasics
 
     private void Shoot()
     {
+        if (!IsTargetValid())
+        {
+            target = null;
+            return;
+        }
+
         GameObject projectilePrefab = GetCurrentProjectilePrefab();
 
         if (projectilePrefab == null)
@@ -102,9 +152,9 @@ public class ArcherTower : TowerBasics
         {
             return;
         }
-        
+
         PlayWeaponShootAnimation();
-        
+
         GameObject projectileObject = Instantiate(
             projectilePrefab,
             firingPoint.position,

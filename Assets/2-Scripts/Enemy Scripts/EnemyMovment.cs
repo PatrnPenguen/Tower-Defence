@@ -30,6 +30,7 @@ public class EnemyMovment : MonoBehaviour
     private Coroutine slowCoroutine;
     private bool isStunned = false;
     private bool isDead = false;
+    public bool IsDead => isDead;
     public LookDirection currentLookDirection = LookDirection.Down;
 
     private void Start()

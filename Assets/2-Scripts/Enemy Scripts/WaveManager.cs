@@ -256,12 +256,10 @@ public class WaveManager : MonoBehaviour
             if (hasBoss)
             {
                 targetSpawner.ShowBossWarning();
-                print("boss");
             }
             else
             {
                 targetSpawner.ShowNormalWarning();
-                print("normal");
             }
         }
     }

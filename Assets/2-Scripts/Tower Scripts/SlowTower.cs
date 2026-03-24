@@ -21,6 +21,7 @@ public class SlowTower : TowerBasics
 
     private void Update()
     {
+        UpdateButtonTexts();
         timeUntilCast += Time.deltaTime;
 
         if (timeUntilCast < slowCooldown)
@@ -28,7 +29,7 @@ public class SlowTower : TowerBasics
             return;
         }
 
-        if (!HasEnemyInRange())
+        if (!HasAliveEnemyInRange())
         {
             return;
         }
@@ -47,15 +48,35 @@ public class SlowTower : TowerBasics
         return slowDuration;
     }
 
-    private bool HasEnemyInRange()
+    private bool HasAliveEnemyInRange()
     {
-        Collider2D hit = Physics2D.OverlapCircle(
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
             transform.position,
             range,
             enemyMask
         );
 
-        return hit != null;
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i] == null)
+            {
+                continue;
+            }
+
+            EnemyMovment enemyMovment = hits[i].GetComponent<EnemyMovment>();
+
+            if (enemyMovment == null)
+            {
+                enemyMovment = hits[i].GetComponentInParent<EnemyMovment>();
+            }
+
+            if (enemyMovment != null && !enemyMovment.IsDead)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void CastSlowRing()
@@ -97,13 +118,9 @@ public class SlowTower : TowerBasics
         }
         
         slowDuration += 0.1f;
-        if (slowDuration < 0.6f)
-        {
-            slowDuration = 0.6f;
-        }
         
-        upgradeCost += 30;
-        sellCost += 20;
+        upgradeCost += upgradeCostUp;
+        sellCost += sellCostUp;
 
         currentLevel++;
 

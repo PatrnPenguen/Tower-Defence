@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb0d44973bbba93478dc3c848a0240aa, type: 3}
+  m_Name: Wave 15
+  m_EditorClassIdentifier: 
+  startDelay: 1
+  spawnerEntries:
+  - lane: 0
+    groups:
+    - enemyPrefab: {fileID: 2925070313628535627, guid: 0032e2a3a5c5dcd419d8beade9269b4f, type: 3}
+      enemyCount: 20
+      timeBetweenSpawns: 4
+      delayBeforeGroup: 2
+      isBoss: 0
+  - lane: 0
+    groups:
+    - enemyPrefab: {fileID: 2925070313628535627, guid: 43dca8042c1b1d2419c33d304c687d0a, type: 3}
+      enemyCount: 15
+      timeBetweenSpawns: 1.5
+      delayBeforeGroup: 0
+      isBoss: 0
+    - enemyPrefab: {fileID: 2925070313628535627, guid: aab71769751e00f41a5002085623934e, type: 3}
+      enemyCount: 10
+      timeBetweenSpawns: 1.5
+      delayBeforeGroup: 4
+      isBoss: 0

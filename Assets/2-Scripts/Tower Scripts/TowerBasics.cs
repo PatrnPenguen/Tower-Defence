@@ -39,6 +39,11 @@ public class TowerBasics : MonoBehaviour
     [Header("Animation Speed Settings")]
     [SerializeField] protected float baseWeaponAnimationSpeed = 1f;
 
+    [Header("Shoot SFX")]
+    [SerializeField] protected AudioSource shootAudioSource;
+    [SerializeField] protected AudioClip shootSfx;
+    [SerializeField] [Range(0f, 1f)] protected float shootSfxVolume = 1f;
+
     protected float baseAttackSpeed;
     protected Plot ownerPlot;
 
@@ -65,6 +70,11 @@ public class TowerBasics : MonoBehaviour
     protected virtual void Start()
     {
         baseAttackSpeed = attackSpeed;
+
+        if (shootAudioSource == null)
+        {
+            shootAudioSource = GetComponent<AudioSource>();
+        }
 
         if (upgradeButton != null)
         {
@@ -135,6 +145,18 @@ public class TowerBasics : MonoBehaviour
         {
             weaponAnimator.SetTrigger("Shoot");
         }
+
+        PlayShootSfx();
+    }
+
+    protected void PlayShootSfx()
+    {
+        if (shootAudioSource == null || shootSfx == null)
+        {
+            return;
+        }
+
+        shootAudioSource.PlayOneShot(shootSfx, shootSfxVolume);
     }
     
     protected void UpdateWeaponAnimationSpeed()
@@ -221,7 +243,7 @@ public class TowerBasics : MonoBehaviour
 
     protected bool CanUpgrade()
     {
-        return currentLevel < maxLevel;
+        return currentLevel < maxLevel && LevelManager.main.currency >= upgradeCost;
     }
 
     protected void UpdateButtonTexts()
@@ -239,7 +261,14 @@ public class TowerBasics : MonoBehaviour
             }
             else
             {
-                upgradeButtonText.text = "Max Level";
+                if (currentLevel == maxLevel)
+                {
+                    upgradeButtonText.text = "Max Level";
+                }
+                else
+                {
+                    upgradeButtonText.text = "Upgrade" + "\n" + upgradeCost;
+                }
             }
         }
 

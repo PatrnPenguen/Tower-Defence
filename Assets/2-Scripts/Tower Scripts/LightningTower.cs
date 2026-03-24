@@ -16,7 +16,6 @@ public class LightningTower : TowerBasics
     [Header("Lightning Special Stats Upgrade")]
     [SerializeField] private float stunDurationUp = 0.5f;
 
-
     private Transform target;
     private float timeUntilFire;
 
@@ -27,8 +26,10 @@ public class LightningTower : TowerBasics
 
     private void Update()
     {
-        if (target == null)
+        UpdateButtonTexts();
+        if (!IsTargetValid())
         {
+            target = null;
             FindTarget();
             return;
         }
@@ -60,10 +61,52 @@ public class LightningTower : TowerBasics
             enemyMask
         );
 
-        if (hits.Length > 0)
+        for (int i = 0; i < hits.Length; i++)
         {
-            target = hits[0].transform;
+            Transform possibleTarget = hits[i].transform;
+
+            if (possibleTarget == null)
+            {
+                continue;
+            }
+
+            EnemyMovment enemyMovment = possibleTarget.GetComponent<EnemyMovment>();
+
+            if (enemyMovment == null)
+            {
+                enemyMovment = possibleTarget.GetComponentInParent<EnemyMovment>();
+            }
+
+            if (enemyMovment != null && !enemyMovment.IsDead)
+            {
+                target = possibleTarget;
+                return;
+            }
         }
+
+        target = null;
+    }
+
+    private bool IsTargetValid()
+    {
+        if (target == null)
+        {
+            return false;
+        }
+
+        EnemyMovment enemyMovment = target.GetComponent<EnemyMovment>();
+
+        if (enemyMovment == null)
+        {
+            enemyMovment = target.GetComponentInParent<EnemyMovment>();
+        }
+
+        if (enemyMovment == null)
+        {
+            return false;
+        }
+
+        return !enemyMovment.IsDead;
     }
 
     private void RotateTowardsTarget()
@@ -99,6 +142,12 @@ public class LightningTower : TowerBasics
 
     private void Shoot()
     {
+        if (!IsTargetValid())
+        {
+            target = null;
+            return;
+        }
+
         GameObject projectilePrefab = GetCurrentProjectilePrefab();
 
         if (projectilePrefab == null)
@@ -156,6 +205,7 @@ public class LightningTower : TowerBasics
         currentLevel++;
 
         ApplyLevelVisuals();
+        UpdateWeaponAnimationSpeed();
         UpdateButtonTexts();
     }
 
