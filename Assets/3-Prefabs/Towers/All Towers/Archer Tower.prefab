@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  range: 1
+  range: 2.3
   attackSpeed: 2
   buildCost: 100
   upgradeCost: 100

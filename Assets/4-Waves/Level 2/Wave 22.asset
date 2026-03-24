@@ -13,4 +13,28 @@ MonoBehaviour:
   m_Name: Wave 22
   m_EditorClassIdentifier: 
   startDelay: 1
-  spawnerEntries: []
+  spawnerEntries:
+  - lane: 0
+    groups:
+    - enemyPrefab: {fileID: 2925070313628535627, guid: 10f572a8571ed5c45a0d1d96f27cbd83, type: 3}
+      enemyCount: 12
+      timeBetweenSpawns: 1
+      delayBeforeGroup: 0
+      isBoss: 0
+    - enemyPrefab: {fileID: 2925070313628535627, guid: aa1353ff0cfdae5429417507fe11c1dd, type: 3}
+      enemyCount: 12
+      timeBetweenSpawns: 1
+      delayBeforeGroup: 5
+      isBoss: 0
+  - lane: 0
+    groups:
+    - enemyPrefab: {fileID: 2925070313628535627, guid: f6e7791c20f87c3408d47066cc1fb05b, type: 3}
+      enemyCount: 12
+      timeBetweenSpawns: 1
+      delayBeforeGroup: 0
+      isBoss: 0
+    - enemyPrefab: {fileID: 2925070313628535627, guid: aab71769751e00f41a5002085623934e, type: 3}
+      enemyCount: 12
+      timeBetweenSpawns: 1
+      delayBeforeGroup: 5
+      isBoss: 0
