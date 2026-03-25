@@ -199,7 +199,7 @@ public class ArcherTower : TowerBasics
 
     private void OnDrawGizmosSelected()
     {
-        Handles.color = Color.cyan;
-        Handles.DrawWireDisc(transform.position, transform.forward, range);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }
