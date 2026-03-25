@@ -36,16 +36,20 @@ public class LevelManager : MonoBehaviour
 
     private int currentHealth;
     private bool gameEnded = false;
+    private bool saveStateLoaded = false;
 
     private void Awake()
     {
         main = this;
+
+        // Default values are set once here.
+        // If there is a save, GameSaveManager will overwrite these later.
+        currency = startCurrency;
+        currentHealth = startHealth;
     }
 
     private void Start()
     {
-        currency = startCurrency;
-        currentHealth = startHealth;
         RefreshHealthUI();
 
         if (damageAudioSource == null)
@@ -302,5 +306,23 @@ public class LevelManager : MonoBehaviour
     public int GetSavedStarsForLevel(int levelNumber)
     {
         return PlayerPrefs.GetInt("LevelStars_" + levelNumber, 0);
+    }
+
+    public int GetCurrency()
+    {
+        return currency;
+    }
+
+    public void LoadSaveState(int savedCurrency, int savedHealth)
+    {
+        currency = savedCurrency;
+        currentHealth = savedHealth;
+        saveStateLoaded = true;
+        RefreshHealthUI();
+    }
+
+    public bool HasLoadedSaveState()
+    {
+        return saveStateLoaded;
     }
 }

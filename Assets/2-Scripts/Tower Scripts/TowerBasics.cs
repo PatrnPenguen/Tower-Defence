@@ -374,4 +374,35 @@ public class TowerBasics : MonoBehaviour
             ShowRange();
         }
     }
+    
+    public virtual void ApplySavedLevel(int savedLevel)
+    {
+        savedLevel = Mathf.Clamp(savedLevel, 1, maxLevel);
+
+        currentLevel = 1;
+        ApplyLevelVisuals();
+        UpdateWeaponAnimationSpeed();
+        UpdateButtonTexts();
+
+        while (currentLevel < savedLevel)
+        {
+            damage += damageUp;
+            range += rangeUp;
+            attackSpeed += attackSpeedUp;
+
+            upgradeCost += upgradeCostUp;
+            sellCost += sellCostUp;
+
+            currentLevel++;
+        }
+
+        ApplyLevelVisuals();
+        UpdateWeaponAnimationSpeed();
+        UpdateButtonTexts();
+
+        if (rangeIndicator != null && rangeIndicator.activeSelf)
+        {
+            ShowRange();
+        }
+    }
 }

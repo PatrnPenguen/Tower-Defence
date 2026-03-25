@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Plot : MonoBehaviour
 {
+    [Header("Plot Save")]
+    [SerializeField] private int plotId = 0;
+
     [Header("References")]
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Color hoverColor;
@@ -14,6 +17,7 @@ public class Plot : MonoBehaviour
 
     private Color startColor;
     private bool isTowerBuilded = false;
+    private int builtTowerIndex = -1;
 
     private void Start()
     {
@@ -86,6 +90,7 @@ public class Plot : MonoBehaviour
             return;
         }
 
+        int selectedTowerIndex = BuildManager.main.GetSelectedTowerIndex();
         TowerData towerToBuild = BuildManager.main.GetSelectedTower();
 
         if (towerToBuild == null || towerToBuild.prefab == null)
@@ -114,17 +119,81 @@ public class Plot : MonoBehaviour
             tower.SetOwnerPlot(this);
         }
 
+        builtTowerIndex = selectedTowerIndex;
         sr.color = towerBuildColor;
         isTowerBuilded = true;
 
         BuildManager.main.ClearSelectedTower();
     }
 
+    public void BuildTowerFromSave(int towerIndex, int towerLevel)
+    {
+        if (towerObj != null)
+        {
+            return;
+        }
+
+        TowerData towerToBuild = BuildManager.main.GetTowerDataByIndex(towerIndex);
+
+        if (towerToBuild == null || towerToBuild.prefab == null)
+        {
+            return;
+        }
+
+        towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
+        tower = towerObj.GetComponent<TowerBasics>();
+
+        if (tower != null)
+        {
+            tower.SetOwnerPlot(this);
+            tower.ApplySavedLevel(towerLevel);
+        }
+
+        builtTowerIndex = towerIndex;
+        isTowerBuilded = true;
+        sr.color = towerBuildColor;
+    }
+
     public void ClearPlot()
     {
         towerObj = null;
         tower = null;
+        builtTowerIndex = -1;
         isTowerBuilded = false;
         sr.color = startColor;
+    }
+
+    public void ClearPlotForLoad()
+    {
+        if (towerObj != null)
+        {
+            Destroy(towerObj);
+        }
+
+        towerObj = null;
+        tower = null;
+        builtTowerIndex = -1;
+        isTowerBuilded = false;
+        sr.color = startColor;
+    }
+
+    public int GetPlotId()
+    {
+        return plotId;
+    }
+
+    public bool HasTower()
+    {
+        return towerObj != null && tower != null;
+    }
+
+    public TowerBasics GetTower()
+    {
+        return tower;
+    }
+
+    public int GetBuiltTowerIndex()
+    {
+        return builtTowerIndex;
     }
 }

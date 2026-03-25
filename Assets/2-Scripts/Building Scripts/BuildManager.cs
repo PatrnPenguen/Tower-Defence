@@ -77,4 +77,9 @@ public class BuildManager : MonoBehaviour
             shopButtons[i].RefreshVisual();
         }
     }
+    
+    public int GetSelectedTowerIndex()
+    {
+        return selectedTowerIndex;
+    }
 }

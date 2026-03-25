@@ -208,6 +208,30 @@ public class LightningTower : TowerBasics
         UpdateWeaponAnimationSpeed();
         UpdateButtonTexts();
     }
+    
+    public override void ApplySavedLevel(int savedLevel)
+    {
+        savedLevel = Mathf.Clamp(savedLevel, 1, maxLevel);
+
+        currentLevel = 1;
+
+        while (currentLevel < savedLevel)
+        {
+            damage += damageUp;
+            range += rangeUp;
+            attackSpeed += attackSpeedUp;
+            stunDuration += stunDurationUp;
+
+            upgradeCost += upgradeCostUp;
+            sellCost += sellCostUp;
+
+            currentLevel++;
+        }
+
+        ApplyLevelVisuals();
+        UpdateWeaponAnimationSpeed();
+        UpdateButtonTexts();
+    }
 
     private void OnDrawGizmosSelected()
     {

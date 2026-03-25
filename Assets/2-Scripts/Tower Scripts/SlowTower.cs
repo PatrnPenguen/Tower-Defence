@@ -129,6 +129,32 @@ public class SlowTower : TowerBasics
 
         Debug.Log("Slow tower upgraded");
     }
+    
+    public override void ApplySavedLevel(int savedLevel)
+    {
+        savedLevel = Mathf.Clamp(savedLevel, 1, maxLevel);
+
+        currentLevel = 1;
+
+        while (currentLevel < savedLevel)
+        {
+            slowCooldown -= 0.3f;
+            if (slowCooldown < 1.5f)
+            {
+                slowCooldown = 1.5f;
+            }
+
+            slowDuration += 0.1f;
+
+            upgradeCost += upgradeCostUp;
+            sellCost += sellCostUp;
+
+            currentLevel++;
+        }
+
+        ApplyLevelVisuals();
+        UpdateButtonTexts();
+    }
 
     private void OnDrawGizmosSelected()
     {
