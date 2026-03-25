@@ -14,11 +14,18 @@ public class LevelSelectButtonUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText;
 
     [Header("Star References")]
-    [SerializeField] private GameObject[] starObjects;
-
+    //[SerializeField] private SpriteRenderer star1Outline;
+    [SerializeField] private GameObject star1Inside;
+    //[SerializeField] private SpriteRenderer star2Outline;
+    [SerializeField] private GameObject star2Inside;
+    //[SerializeField] private SpriteRenderer star3Outline;
+    [SerializeField] private GameObject star3Inside;
+    
     [Header("Colors")]
     [SerializeField] private Color unlockedColor = Color.white;
     [SerializeField] private Color lockedColor = Color.gray;
+    [SerializeField] private Color unlockedTextColor = Color.white;
+    [SerializeField] private Color lockedTextColor = Color.gray;
 
     private MainMenuSceneManager mainMenuSceneManager;
 
@@ -30,7 +37,8 @@ public class LevelSelectButtonUI : MonoBehaviour
 
     public void RefreshButton()
     {
-        bool isUnlocked = LevelProgressManager.IsLevelUnlocked(levelNumber);
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        bool isUnlocked = levelNumber <= unlockedLevel;
 
         if (button != null)
         {
@@ -44,26 +52,32 @@ public class LevelSelectButtonUI : MonoBehaviour
 
         if (levelText != null)
         {
-            levelText.color = isUnlocked ? Color.white : new Color(0.7f, 0.7f, 0.7f, 1f);
+            levelText.color = isUnlocked ? unlockedTextColor : lockedTextColor;
         }
 
-        int savedStars = LevelProgressManager.GetStars(levelNumber);
+        int savedStars = PlayerPrefs.GetInt("LevelStars_" + levelNumber, 0);
 
-        if (starObjects != null)
+        if (star1Inside != null)
         {
-            for (int i = 0; i < starObjects.Length; i++)
-            {
-                if (starObjects[i] != null)
-                {
-                    starObjects[i].SetActive(i < savedStars);
-                }
-            }
+            star1Inside.SetActive(savedStars >= 1);
+        }
+
+        if (star2Inside != null)
+        {
+            star2Inside.SetActive(savedStars >= 2);
+        }
+
+        if (star3Inside != null)
+        {
+            star3Inside.SetActive(savedStars >= 3);
         }
     }
 
     public void OnClickLevelButton()
     {
-        if (!LevelProgressManager.IsLevelUnlocked(levelNumber))
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+
+        if (levelNumber > unlockedLevel)
         {
             return;
         }

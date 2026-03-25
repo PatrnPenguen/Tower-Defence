@@ -10,9 +10,18 @@ public class MainMenuSceneManager : MonoBehaviour
     [Header("Level Buttons")]
     [SerializeField] private LevelSelectButtonUI[] levelButtons;
 
+    [Header("Play Button Levels")]
+    [SerializeField] private string level1SceneName = "Level1";
+    [SerializeField] private string level2SceneName = "Level2";
+    [SerializeField] private string level3SceneName = "Level3";
+
     private void Start()
     {
-        LevelProgressManager.InitializeProgress();
+        if (!PlayerPrefs.HasKey("UnlockedLevel"))
+        {
+            PlayerPrefs.SetInt("UnlockedLevel", 1);
+            PlayerPrefs.Save();
+        }
 
         if (levelSelectPanel != null)
         {
@@ -25,6 +34,25 @@ public class MainMenuSceneManager : MonoBehaviour
         }
 
         RefreshLevelButtons();
+    }
+
+    public void PlayLastUnlockedLevel()
+    {
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+
+        if (unlockedLevel <= 1)
+        {
+            SceneManager.LoadScene(level1SceneName);
+            return;
+        }
+
+        if (unlockedLevel == 2)
+        {
+            SceneManager.LoadScene(level2SceneName);
+            return;
+        }
+
+        SceneManager.LoadScene(level3SceneName);
     }
 
     public void OpenLevelSelectPanel()
@@ -118,7 +146,16 @@ public class MainMenuSceneManager : MonoBehaviour
 
     public void ResetProgress()
     {
-        LevelProgressManager.ResetAllProgress();
+        PlayerPrefs.DeleteKey("UnlockedLevel");
+
+        for (int i = 1; i <= 50; i++)
+        {
+            PlayerPrefs.DeleteKey("LevelStars_" + i);
+        }
+
+        PlayerPrefs.SetInt("UnlockedLevel", 1);
+        PlayerPrefs.Save();
+
         RefreshLevelButtons();
     }
 }
