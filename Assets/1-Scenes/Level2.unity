@@ -5625,8 +5625,8 @@ MonoBehaviour:
   damageSfx: {fileID: 8300000, guid: 2969d4c2bcf41084ea5d54c1c754125d, type: 3}
   damageSfxVolume: 0.4
   mainMenuSceneName: MainMenu
-  nextLevelSceneName: Level2
-  currentLevelNumber: 1
+  nextLevelSceneName: Level3
+  currentLevelNumber: 2
   star1: {fileID: 6242844224521826833}
   star2: {fileID: 92782378}
   star3: {fileID: 539818325}
