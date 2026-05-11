@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1744426334064857341}
   - component: {fileID: 3283854800537765820}
   - component: {fileID: 6021620963808344299}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 514358659266538246}
   - component: {fileID: 55646889628368146}
   - component: {fileID: 4389390989600456985}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Sell Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 8484617970354191847}
   - component: {fileID: 4899886862204355717}
   - component: {fileID: 8908804955897069630}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Upgrade Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,7 +649,7 @@ GameObject:
   - component: {fileID: 7639776731479348055}
   - component: {fileID: 986981815762087355}
   - component: {fileID: 3821090560055772610}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Upgrade UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,7 +673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.35250002}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8275248391119055271
@@ -696,8 +696,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -943280795
-  m_SortingOrder: 0
+  m_SortingLayerID: -1453333657
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &7639776731479348055
 MonoBehaviour:
@@ -907,7 +907,7 @@ GameObject:
   - component: {fileID: 1080814189226818439}
   - component: {fileID: 1163191908851008149}
   - component: {fileID: 2609232549647995119}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Upgrade Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1114,7 +1114,7 @@ GameObject:
   - component: {fileID: 126034441565892047}
   - component: {fileID: 5191500464100245736}
   - component: {fileID: 7684745687353637490}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Sell Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

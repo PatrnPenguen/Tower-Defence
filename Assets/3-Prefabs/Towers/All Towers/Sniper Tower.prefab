@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 1829128972591479421}
   - component: {fileID: 952149480562364684}
   - component: {fileID: 7297948808282182386}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 8046668594226552482}
   - component: {fileID: 8805169327002141027}
   - component: {fileID: 5776789360564690104}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Sell Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 1424361249531282475}
   - component: {fileID: 4156018570104444605}
   - component: {fileID: 6915477514152495691}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Upgrade UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,8 +644,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -943280795
-  m_SortingOrder: 0
+  m_SortingLayerID: -1453333657
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &1424361249531282475
 MonoBehaviour:
@@ -712,7 +712,7 @@ GameObject:
   - component: {fileID: 6517725838973784762}
   - component: {fileID: 12602306381065282}
   - component: {fileID: 6767882571108495186}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Upgrade Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -832,7 +832,7 @@ GameObject:
   - component: {fileID: 8881538182225641454}
   - component: {fileID: 2713972569168497983}
   - component: {fileID: 6068776891315665611}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Upgrade Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1145,7 +1145,7 @@ GameObject:
   - component: {fileID: 1642930252621250849}
   - component: {fileID: 356378397297573972}
   - component: {fileID: 5788680392723216263}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Sell Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

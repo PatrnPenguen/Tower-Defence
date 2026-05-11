@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Tower Upgrade
   - Water
   - UI
   - Enemy
@@ -49,6 +49,9 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3351686501
+    locked: 0
+  - name: Tower Upgrade
+    uniqueID: 2841633639
     locked: 0
   m_RenderingLayers:
   - Default

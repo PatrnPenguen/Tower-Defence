@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -284,6 +285,18 @@ public class LevelManager : MonoBehaviour
 
     public void TryAgain()
     {
+        StartCoroutine(RestartLevelCoroutine());
+    }
+
+    private IEnumerator RestartLevelCoroutine()
+    {
+        if (GameSaveManager.main != null)
+        {
+            GameSaveManager.main.DeleteSave();
+        }
+
+        yield return null;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
